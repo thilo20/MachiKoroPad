@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.thilo20.machikoropad.RollDiceActivity">
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:text="Spieler1 würfelt"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView3"
+        android:id="@+id/w1">
+
+        <RadioButton
+            android:id="@+id/dice1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@drawable/one"
+            android:checked="false"
+            android:onClick="diceRolled1" />
+
+        <RadioButton
+            android:id="@+id/dice4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@drawable/four"
+            android:checked="false"
+            android:onClick="diceRolled4" />
+
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/textViewStats"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/w1"
+        android:text="last rolls"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="60px"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+    <RadioButton
+        android:id="@+id/dice2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:button="@drawable/two"
+        android:checked="false"
+        android:onClick="diceRolled2"
+        android:layout_below="@+id/textView3"
+        android:layout_toRightOf="@+id/w1"
+        android:layout_toEndOf="@+id/w1" />
+
+    <RadioButton
+        android:id="@+id/dice3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:button="@drawable/three"
+        android:checked="false"
+        android:onClick="diceRolled3"
+        android:layout_alignTop="@+id/dice2"
+        android:layout_toRightOf="@+id/dice2"
+        android:layout_toEndOf="@+id/dice2" />
+
+    <RadioButton
+        android:id="@+id/dice5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:button="@drawable/five"
+        android:checked="false"
+        android:onClick="diceRolled5"
+        android:layout_below="@+id/dice2"
+        android:layout_alignLeft="@+id/dice2"
+        android:layout_alignStart="@+id/dice2" />
+
+    <RadioButton
+        android:id="@+id/dice6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:button="@drawable/six"
+        android:checked="false"
+        android:onClick="diceRolled6"
+        android:layout_alignTop="@+id/dice5"
+        android:layout_toRightOf="@+id/dice5"
+        android:layout_toEndOf="@+id/dice5" />
+
+</RelativeLayout>
