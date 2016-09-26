@@ -1,11 +1,13 @@
 package com.thilo20.machikoropad;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Handler;
 import android.os.Handler.Callback;
 import android.os.Message;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.view.ActionMode;
@@ -44,8 +46,30 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void startNewGame(View view) {
-        Intent intent = new Intent(this, NewGameActivity.class);
-        startActivity(intent);
+        // alert if a game is already there
+        if (game != null) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+            builder.setMessage("A game is in progress. Do you want to dismiss it?");
+            builder.setIcon(android.R.drawable.ic_dialog_alert);
+            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Intent intent = new Intent(MainActivity.this, NewGameActivity.class);
+                    startActivity(intent);
+                }
+            });
+            builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+            AlertDialog alert = builder.create();
+            alert.show();
+        } else {
+            Intent intent = new Intent(this, NewGameActivity.class);
+            startActivity(intent);
+        }
     }
 
     public void continueGame(View view) {
