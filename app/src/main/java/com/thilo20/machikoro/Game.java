@@ -83,12 +83,12 @@ public class Game implements Serializable {
 
     public void nextTurn() {
         turns++;
-        if (hasExtraTurn == false) nextPlayer();
+        if (!hasExtraTurn) nextPlayer();
     }
 
     public void nextPlayer() {
         currentPlayer++;
-        if (currentPlayer > numPlayers) {
+        if (currentPlayer >= numPlayers) {
             currentPlayer = 0;
             rounds++;
         }
