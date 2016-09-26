@@ -42,8 +42,9 @@ public class NewGameActivity extends AppCompatActivity {
         }
 
         // init game
-        Game game = Game.getInstance();
+        Game game = new Game();
         game.initGame(players);
+        Game.setInstance(game);
 
         // player 1 rolls..
         Intent intent = new Intent(this, RollDiceActivity.class);

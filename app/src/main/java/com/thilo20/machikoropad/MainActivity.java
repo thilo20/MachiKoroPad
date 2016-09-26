@@ -26,15 +26,6 @@ public class MainActivity extends AppCompatActivity {
      */
     Game game;
 
-    public Game getGame() {
-        return game;
-    }
-
-    public void setGame(Game game) {
-        this.game = game;
-    }
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
         // load current game
         // TODO: Game implements Serializable, better use android.util.JsonReader!
 //        savedInstanceState.getSerializable();
+        game = Game.getInstance();
 
         // disable "continue game" if no game is active
         Button btContinueGame = (Button) findViewById(R.id.btContinueGame);

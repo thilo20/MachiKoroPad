@@ -42,7 +42,6 @@
             android:button="@drawable/four"
             android:checked="false"
             android:onClick="diceRolled4" />
-
     </RadioGroup>
 
     <TextView

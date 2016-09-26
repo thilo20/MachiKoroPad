@@ -22,13 +22,15 @@ public class Game implements Serializable {
     int turns = 0;
     int rounds = 0;
 
+    // current game instance
     public static Game instance=null;
 
     public static Game getInstance() {
-        if (instance==null) {
-            instance=new Game();
-        }
         return instance;
+    }
+
+    public static void setInstance(Game game) {
+        instance = game;
     }
 
     Player[] players;
