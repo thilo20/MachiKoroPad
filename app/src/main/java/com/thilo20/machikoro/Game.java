@@ -1,5 +1,7 @@
 package com.thilo20.machikoro;
 
+import android.graphics.Color;
+
 import java.io.Serializable;
 
 /**
@@ -8,16 +10,17 @@ import java.io.Serializable;
  */
 public class Game implements Serializable {
     // new game
-    byte numPlayers = 2;
+    int numPlayers = 2;
     boolean harbour;
 
     // in game
-    byte currentPlayer=0;
-    byte step=0; // 0: roll dice, 1: buy card
+    int currentPlayer = 0;
+    int step = 0; // 0: roll dice, 1: buy card
+    boolean hasExtraTurn = false;
 
     // stats
-    byte turns=0;
-    byte rounds=0;
+    int turns = 0;
+    int rounds = 0;
 
     public static Game instance=null;
 
@@ -30,11 +33,11 @@ public class Game implements Serializable {
 
     Player[] players;
 
-    public byte getNumPlayers() {
+    public int getNumPlayers() {
         return numPlayers;
     }
 
-    public void setNumPlayers(byte numPlayers) {
+    public void setNumPlayers(int numPlayers) {
         this.numPlayers = numPlayers;
     }
 
@@ -50,33 +53,62 @@ public class Game implements Serializable {
         return players[currentPlayer];
     }
 
-    public void setCurrentPlayer(byte currentPlayer) {
+    public void setCurrentPlayer(int currentPlayer) {
         this.currentPlayer = currentPlayer;
     }
 
-    public byte getStep() {
+    public int getStep() {
         return step;
     }
 
-    public void setStep(byte step) {
+    public void setStep(int step) {
         this.step = step;
     }
 
-    public byte getTurns() {
+    public int getTurns() {
         return turns;
     }
 
-    public void setTurns(byte turns) {
+    public void setTurns(int turns) {
         this.turns = turns;
     }
 
-    public byte getRounds() {
+    public int getRounds() {
         return rounds;
     }
 
-    public void setRounds(byte rounds) {
+    public void setRounds(int rounds) {
         this.rounds = rounds;
     }
 
+    public void nextTurn() {
+        turns++;
+        if (hasExtraTurn == false) nextPlayer();
+    }
 
+    public void nextPlayer() {
+        currentPlayer++;
+        if (currentPlayer > numPlayers) {
+            currentPlayer = 0;
+            rounds++;
+        }
+    }
+
+    public void initGame(int numPlayers) {
+        this.numPlayers = numPlayers;
+        players = new Player[numPlayers];
+
+        if (numPlayers > 0) {
+            players[0] = new Player("Aye", 1, Color.RED);
+        }
+        if (numPlayers > 1) {
+            players[1] = new Player("Bee", 2, Color.GREEN);
+        }
+        if (numPlayers > 2) {
+            players[2] = new Player("Cee", 3, Color.BLUE);
+        }
+        if (numPlayers > 3) {
+            players[3] = new Player("Dee", 4, Color.YELLOW);
+        }
+    }
 }

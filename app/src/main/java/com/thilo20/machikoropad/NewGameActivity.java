@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.thilo20.machikoro.Game;
+
 public class NewGameActivity extends AppCompatActivity {
 
     public final static String EXTRA_MESSAGE = "com.thilo20.machikoropad.MESSAGE";
@@ -31,6 +33,10 @@ public class NewGameActivity extends AppCompatActivity {
         }
 
         // init game
+        Game game = Game.getInstance();
+        game.initGame(players);
+
+        // player 1 rolls..
         Intent intent = new Intent(this, RollDiceActivity.class);
         startActivity(intent);
     }

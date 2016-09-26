@@ -13,5 +13,5 @@ public class Card {
         BLUE, GREEN, RED, VIOLET, GRAY
     }
 
-    byte cost;
+    int cost;
 }

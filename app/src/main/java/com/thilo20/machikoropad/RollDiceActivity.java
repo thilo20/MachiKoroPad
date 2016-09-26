@@ -60,8 +60,15 @@ public class RollDiceActivity extends AppCompatActivity {
         dc.increment(number);
         Logger.getLogger(getClass().getName()).log(Level.INFO, dc.toString());
 
-        Intent intent = new Intent(this, BuyCardActivity.class);
+        // proceed
+        game.nextTurn();
+
+        Intent intent = new Intent(this, RollDiceActivity.class);
         startActivity(intent);
+
+//later...
+//        Intent intent = new Intent(this, BuyCardActivity.class);
+//        startActivity(intent);
     }
 
 }

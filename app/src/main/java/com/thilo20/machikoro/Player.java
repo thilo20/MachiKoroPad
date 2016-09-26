@@ -16,8 +16,8 @@ import java.util.Map;
 public class Player {
     // player UI basics
     String name;
-    byte number;
-    Color color;
+    int number;
+    int color;
 
     // dice count stats
     SingleRoll singleRolls = new SingleRoll();
@@ -27,6 +27,12 @@ public class Player {
     int coins = 0;
     List<Card> cards = new ArrayList<>();
 
+    public Player(String name, int number, int color) {
+        this.name = name;
+        this.number = number;
+        this.color = color;
+    }
+
     public String getName() {
         return name;
     }
@@ -35,19 +41,19 @@ public class Player {
         this.name = name;
     }
 
-    public byte getNumber() {
+    public int getNumber() {
         return number;
     }
 
-    public void setNumber(byte number) {
+    public void setNumber(int number) {
         this.number = number;
     }
 
-    public Color getColor() {
+    public int getColor() {
         return color;
     }
 
-    public void setColor(Color color) {
+    public void setColor(int color) {
         this.color = color;
     }
 
