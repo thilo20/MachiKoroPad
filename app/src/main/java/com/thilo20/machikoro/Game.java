@@ -99,16 +99,16 @@ public class Game implements Serializable {
         players = new Player[numPlayers];
 
         if (numPlayers > 0) {
-            players[0] = new Player("Aye", 1, Color.RED);
+            players[0] = new Player("Amy", 1, Color.RED);
         }
         if (numPlayers > 1) {
-            players[1] = new Player("Bee", 2, Color.GREEN);
+            players[1] = new Player("Bob", 2, Color.GREEN);
         }
         if (numPlayers > 2) {
             players[2] = new Player("Cee", 3, Color.BLUE);
         }
         if (numPlayers > 3) {
-            players[3] = new Player("Dee", 4, Color.YELLOW);
+            players[3] = new Player("Dau", 4, Color.YELLOW);
         }
     }
 }

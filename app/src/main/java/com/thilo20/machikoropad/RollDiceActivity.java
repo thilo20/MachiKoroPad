@@ -29,6 +29,8 @@ public class RollDiceActivity extends AppCompatActivity {
         dc = game.getCurrentPlayer().getSingleRolls();
 
         // update text with stats
+        TextView tvPlayer = (TextView) findViewById(R.id.textView3);
+        tvPlayer.setText(game.getCurrentPlayer().getName() + " würfelt");
         TextView tvStats=(TextView)findViewById(R.id.textViewStats);
         tvStats.setText("Player " + game.getCurrentPlayer().getNumber() + " stats: " + dc.toString());
     }

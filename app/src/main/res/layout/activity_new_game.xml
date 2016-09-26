@@ -29,31 +29,36 @@
 
             <RadioGroup
                 android:layout_width="201dp"
-                android:layout_height="54dp"
+                android:layout_height="wrap_content"
                 android:layout_column="3"
-                android:checkedButton="0"
-                android:visibility="visible">
+                android:checkedButton="2"
+                android:visibility="visible"
+                android:id="@+id/rgNumPlayers">
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1"
+                    android:id="@+id/radioButton1" />
 
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="2"
-                    android:id="@+id/radioButton"
+                    android:id="@+id/radioButton2"
                     android:checked="true" />
 
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="3"
-                    android:id="@+id/radioButton2"
-                    android:checked="false" />
+                    android:id="@+id/radioButton3" />
 
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="4"
-                    android:id="@+id/radioButton3"
-                    android:checked="false" />
+                    android:id="@+id/radioButton4" />
             </RadioGroup>
         </TableRow>
 
