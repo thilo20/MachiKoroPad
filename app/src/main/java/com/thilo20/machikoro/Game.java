@@ -8,7 +8,7 @@ import java.io.Serializable;
  */
 public class Game implements Serializable {
     // new game
-    byte players=2;
+    byte numPlayers = 2;
     boolean harbour;
 
     // in game
@@ -28,12 +28,14 @@ public class Game implements Serializable {
         return instance;
     }
 
-    public byte getPlayers() {
-        return players;
+    Player[] players;
+
+    public byte getNumPlayers() {
+        return numPlayers;
     }
 
-    public void setPlayers(byte players) {
-        this.players = players;
+    public void setNumPlayers(byte numPlayers) {
+        this.numPlayers = numPlayers;
     }
 
     public boolean isHarbour() {
@@ -44,8 +46,8 @@ public class Game implements Serializable {
         this.harbour = harbour;
     }
 
-    public byte getCurrentPlayer() {
-        return currentPlayer;
+    public Player getCurrentPlayer() {
+        return players[currentPlayer];
     }
 
     public void setCurrentPlayer(byte currentPlayer) {

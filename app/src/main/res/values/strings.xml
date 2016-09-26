@@ -2,7 +2,7 @@
     <string name="app_name">Machikoro pad</string>
     <string name="app_about">About Machikoro pad:
         \nMachikoro pad is intended to be used while playing the realworld board/card game Machikoro.
-        Each turn, you enter your dice roll result and what card you bought - the app keeps track of each players cards and credits, produces various statistics and predicts who will win!
+        Each turn, you enter your dice roll result and what card you bought - the app keeps track of each numPlayers cards and credits, produces various statistics and predicts who will win!
         \n
         \nVersion: 1.0
         \nAuthor: thilo20

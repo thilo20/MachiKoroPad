@@ -7,12 +7,15 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.thilo20.dicecount.SingleRoll;
+import com.thilo20.machikoro.Game;
+import com.thilo20.machikoro.Player;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class RollDiceActivity extends AppCompatActivity {
 
+    Game game;
     SingleRoll dc;
 
     @Override
@@ -20,12 +23,14 @@ public class RollDiceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_roll_dice);
 
+        // get game
+        game = Game.getInstance();
         // get counter
-        dc = SingleRoll.getInstance();
+        dc = game.getCurrentPlayer().getSingleRolls();
 
         // update text with stats
         TextView tvStats=(TextView)findViewById(R.id.textViewStats);
-        tvStats.setText("stats: "+dc.toString());
+        tvStats.setText("Player " + game.getCurrentPlayer().getNumber() + " stats: " + dc.toString());
     }
 
     /** Called when the user clicked on one of the dice */
@@ -49,7 +54,7 @@ public class RollDiceActivity extends AppCompatActivity {
     }
 
     public void diceRolled(View view, int number) {
-        Logger.getLogger(getClass().getName()).log(Level.INFO, "Rolled "+number);
+        Logger.getLogger(getClass().getName()).log(Level.INFO, "Player " + game.getCurrentPlayer().getNumber() + " rolled " + number);
 
         // increment counter
         dc.increment(number);

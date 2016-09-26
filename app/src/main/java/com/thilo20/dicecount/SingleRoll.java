@@ -88,12 +88,4 @@ public class SingleRoll {
                 '}';
     }
 
-    // test
-    static SingleRoll instance = null;
-
-    public static SingleRoll getInstance() {
-        if (instance == null)
-            instance = new SingleRoll();
-        return instance;
-    }
 }
