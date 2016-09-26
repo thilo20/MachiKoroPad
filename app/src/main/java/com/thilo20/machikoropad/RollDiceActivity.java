@@ -1,22 +1,19 @@
 package com.thilo20.machikoropad;
 
 import android.content.Intent;
-import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import com.thilo20.dice.DiceCount;
+import com.thilo20.dicecount.SingleRoll;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class RollDiceActivity extends AppCompatActivity {
 
-    DiceCount dc;
+    SingleRoll dc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +21,7 @@ public class RollDiceActivity extends AppCompatActivity {
         setContentView(R.layout.activity_roll_dice);
 
         // get counter
-        dc=DiceCount.getInstance();
+        dc = SingleRoll.getInstance();
 
         // update text with stats
         TextView tvStats=(TextView)findViewById(R.id.textViewStats);

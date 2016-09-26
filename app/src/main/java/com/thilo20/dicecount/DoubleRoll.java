@@ -1,4 +1,4 @@
-package com.thilo20.dice;
+package com.thilo20.dicecount;
 
 import java.util.Arrays;
 
@@ -6,7 +6,7 @@ import java.util.Arrays;
  * Counts dice rolls per number for a double roll of 2 6-sided dice.
  * Created by Thilo on 25.09.2016.
  */
-public class DiceCountDoubleRoll {
+public class DoubleRoll {
     /** total number of double dice rolls */
     int rolls=0;
     /** probability for each combination of standard double dice roll */
@@ -60,9 +60,11 @@ public class DiceCountDoubleRoll {
 
     @Override
     public String toString() {
-        return "DiceCountDoubleRoll{" +
+        return "DoubleRoll{" +
                 "total="+getTotal()+
                 " count=" + Arrays.toString(count) +
+                " sums=" + Arrays.toString(getSumCount()) +
+                " doublets=" + getDoubletsCount() +
                 '}';
     }
 
@@ -84,13 +86,74 @@ public class DiceCountDoubleRoll {
         return ret;
     }
 
+    /**
+     * calculates relative frequency score of dice rolls (probability approximation) for sum of red and blue dice, range 0..1, mean 1/6
+     */
+    public float[] getSumRelativeFrequencies() {
+        int[] sum = getSumCount();
+        float[] ret = new float[sum.length];
+        for (int i = 0; i < ret.length; i++) {
+            ret[i] = sum[i] / rolls;
+        }
+        return ret;
+    }
+
+    /**
+     * calculates delta of probability and relative frequency scores for sum of red and blue dice, mean 0
+     */
+    public float[] getSumRelativeFrequenciesDelta() {
+        float[] ret = getSumRelativeFrequencies();
+        int[] combos = {1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1}; //combinations for sum, see getSumCount
+        for (int i = 0; i < ret.length; i++) {
+            ret[i] -= combos[i] * PROB;
+        }
+        return ret;
+    }
+
     /** calculates all doublet occurrences (1-1, 2-2, 3-3, 4-4, 5-5, 6-6) */
     public int getDoubletsCount() {
         int ret=0;
         // sum values on main diagonal
         for(int i=0; i<6; i++) {
-            ret+=count[i][i];
+            ret+= count[i][i];
         }
+        return ret;
+    }
+
+    /**
+     * calculates delta of probability and relative frequency scores for doublets, mean 0
+     */
+    public float getDoubletsRelativeFrequenciesDelta() {
+        return getDoubletsCount() / rolls - 6 * PROB; // 6 doublets out of 36
+    }
+
+    /**
+     * extracts statistics for red dice (aggregates columns)
+     */
+    public SingleRoll extractRedDice() {
+        int[] sum = new int[6];
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 6; j++) {
+                sum[i] += count[i][j];
+            }
+        }
+        SingleRoll ret = new SingleRoll();
+        ret.setCounts(sum);
+        return ret;
+    }
+
+    /**
+     * extracts statistics for blue dice (aggregates rows)
+     */
+    public SingleRoll extractBlueDice() {
+        int[] sum = new int[6];
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 6; j++) {
+                sum[j] += count[i][j];
+            }
+        }
+        SingleRoll ret = new SingleRoll();
+        ret.setCounts(sum);
         return ret;
     }
 }
