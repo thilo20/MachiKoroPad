@@ -59,6 +59,10 @@ public class Game implements Serializable {
         this.currentPlayer = currentPlayer;
     }
 
+    public Player getPlayer(int index) {
+        return players[index];
+    }
+
     public int getStep() {
         return step;
     }

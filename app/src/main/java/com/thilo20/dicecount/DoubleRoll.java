@@ -62,7 +62,7 @@ public class DoubleRoll {
     public String toString() {
         return "DoubleRoll{" +
                 "total="+getTotal()+
-                " count=" + Arrays.toString(count) +
+//too much info:                " count=" + Arrays.toString(count) +
                 " sums=" + Arrays.toString(getSumCount()) +
                 " doublets=" + getDoubletsCount() +
                 '}';

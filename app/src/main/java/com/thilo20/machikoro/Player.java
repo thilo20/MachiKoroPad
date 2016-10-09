@@ -22,6 +22,7 @@ public class Player {
     // dice count stats
     SingleRoll singleRolls = new SingleRoll();
     DoubleRoll doubleRolls = new DoubleRoll();
+    boolean myUsesDoubleRoll = false;
 
     // game specific
     int coins = 0;
@@ -71,5 +72,13 @@ public class Player {
 
     public List<Card> getCards() {
         return cards;
+    }
+
+    public boolean usesDoubleRoll() {
+        return myUsesDoubleRoll;
+    }
+
+    public void setUsesDoubleRoll(boolean usesDoubleRoll) {
+        this.myUsesDoubleRoll = usesDoubleRoll;
     }
 }

@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void showStats(View view) {
-        Intent intent = new Intent(this, AboutActivity.class);
+        Intent intent = new Intent(this, StatsActivity.class);
         startActivity(intent);
     }
 

@@ -20,12 +20,22 @@
         <activity
             android:name=".RollDiceActivity"
             android:parentActivityName=".MainActivity">
+
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.thilo20.machikoropad.MainActivity" />
         </activity>
         <activity android:name=".BuyCardActivity" />
+        <activity
+            android:name=".StatsActivity"
+            android:label="@string/title_activity_stats"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.thilo20.machikoropad.MainActivity" />
+        </activity>
     </application>
 
 </manifest>
