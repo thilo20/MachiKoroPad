@@ -18,11 +18,16 @@ import android.view.ViewGroup;
 
 import android.widget.TextView;
 
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.utils.ColorTemplate;
 import com.thilo20.dicecount.DoubleRoll;
 import com.thilo20.dicecount.SingleRoll;
 import com.thilo20.machikoro.Game;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 
 public class StatsActivity extends AppCompatActivity {
 
@@ -62,16 +67,17 @@ public class StatsActivity extends AppCompatActivity {
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
+        // disable unused action example
+        if (false) {
+            FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+            fab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                }
+            });
+        }
     }
 
 
@@ -107,6 +113,10 @@ public class StatsActivity extends AppCompatActivity {
          */
         private static final String ARG_SECTION_NUMBER = "section_number";
 
+        // stats for this page
+        SingleRoll sr;
+        DoubleRoll dr;
+
         public PlaceholderFragment() {
         }
 
@@ -126,45 +136,102 @@ public class StatsActivity extends AppCompatActivity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_stats, container, false);
-            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
 
+            // init stats for this page
+            initStats(getArguments().getInt(ARG_SECTION_NUMBER));
+
+            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
+            // fill text using format string template from resource
             textView.setText(getString(
                     R.string.section_format,
                     getArguments().getInt(ARG_SECTION_NUMBER),
                     createStatsText(getArguments().getInt(ARG_SECTION_NUMBER))
             ));
 
+            // To make vertical bar chart, initialize graph id this way
+            BarChart barChart = (BarChart) rootView.findViewById(R.id.chart);
+            // fill chart
+            createBarChart(barChart);
+
             return rootView;
+        }
+
+        private void initStats(int sectionNumber) {
+            if (game != null) {
+                if (sectionNumber == 0) {
+                    // create aggregate stats
+                    sr = new SingleRoll();
+                    dr = new DoubleRoll();
+                    for (int i = 0; i < game.getNumPlayers(); i++) {
+                        sr.add(game.getPlayer(i).getSingleRolls());
+                        dr.add(game.getPlayer(i).getDoubleRolls());
+                    }
+                } else {
+                    // use player stats
+                    sr = game.getPlayer(sectionNumber - 1).getSingleRolls();
+                    dr = game.getPlayer(sectionNumber - 1).getDoubleRolls();
+                }
+            }
         }
 
         private String createStatsText(int sectionNumber) {
             if (game != null) {
                 StringBuffer sb = new StringBuffer();
-                SingleRoll sr;
 
                 if (sectionNumber == 0) {
                     sb.append("\nGame progress:");
-                    sb.append("\nRound: " + game.getRounds());
-                    sb.append("\nTurns: " + game.getTurns());
-
-                    // create aggregate stats
-                    sr = new SingleRoll();
-                    for (int i = 0; i < game.getNumPlayers(); i++) {
-                        sr.add(game.getPlayer(i).getSingleRolls());
-                    }
-                } else {
-                    // use player stats
-                    sr = game.getPlayer(sectionNumber - 1).getSingleRolls();
+                    sb.append(" Round " + game.getRounds());
+                    sb.append(", Turn " + game.getTurns());
+                    sb.append("\n");
                 }
 
                 sb.append("\nSingle rolls: 1..6\n");
                 sb.append(sr.toString());
                 sb.append("\n");
-                sb.append(Arrays.toString(sr.getRelativeFrequenciesDelta()));
+                sb.append("\nDouble roll sums: 2..12\n");
+                sb.append(dr.toString());
 
                 return sb.toString();
             }
             return "no game - no statistics.";
+        }
+
+        /**
+         * Creates the bar chart showing counters visually.
+         */
+        private void createBarChart(BarChart barChart) {
+            if (game != null) {
+                ArrayList<BarEntry> entries = new ArrayList<>();
+                ArrayList<BarEntry> entries2 = new ArrayList<>();
+                // create simple bar chart
+
+                // fill single rolls, 1..6
+                int[] counts = sr.getCounts();
+                for (int i = 0; i < counts.length; i++) {
+                    entries.add(new BarEntry(counts[i], i + 1));
+                }
+                // fill double roll sums, 2..12
+                counts = dr.getSumCount();
+                for (int i = 0; i < counts.length; i++) {
+                    entries2.add(new BarEntry(counts[i], i + 2));
+                }
+
+                BarDataSet dataset = new BarDataSet(entries, "# of single rolls: " + sr.getTotal());
+                BarDataSet dataset2 = new BarDataSet(entries2, "# of double rolls: " + dr.getTotal());
+
+                ArrayList<String> labels = new ArrayList<String>();
+                // fill label for dice roll sums, 1..12
+                for (int i = 0; i < 12; i++) {
+                    labels.add(Integer.toString(i + 1));
+                }
+
+                BarData data = new BarData(labels, dataset);
+                data.addDataSet(dataset2);
+
+                dataset.setColors(ColorTemplate.COLORFUL_COLORS);
+                barChart.setData(data);
+                barChart.animateY(1000);
+            }
         }
     }
 
@@ -201,4 +268,5 @@ public class StatsActivity extends AppCompatActivity {
             return null;
         }
     }
+
 }

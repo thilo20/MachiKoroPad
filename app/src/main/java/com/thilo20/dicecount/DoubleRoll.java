@@ -28,6 +28,18 @@ public class DoubleRoll {
         count[red-1][blue-1]++;
     }
 
+    /**
+     * integrates other stats, adds counters
+     */
+    public void add(final DoubleRoll other) {
+        for (int i = 0; i < count.length; i++) {
+            for (int j = 0; j < count.length; j++) {
+                count[i][j] += other.count[i][j];
+            }
+        }
+        rolls += other.rolls;
+    }
+
     public int[][] getCounts() {
         return count;
     }

@@ -42,6 +42,10 @@ public class MainActivity extends AppCompatActivity {
         Button btContinueGame = (Button) findViewById(R.id.btContinueGame);
         btContinueGame.setEnabled(game != null);
 
+        // disable "statistics" if no game is active
+        Button btShowStats = (Button) findViewById(R.id.btStats);
+        btShowStats.setEnabled(game != null);
+
         initDiceRoller();
     }
 
@@ -81,8 +85,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void showStats(View view) {
-        Intent intent = new Intent(this, StatsActivity.class);
-        startActivity(intent);
+        if (game != null) {
+            Intent intent = new Intent(this, StatsActivity.class);
+            startActivity(intent);
+        }
     }
 
     public void openSettings(View view) {

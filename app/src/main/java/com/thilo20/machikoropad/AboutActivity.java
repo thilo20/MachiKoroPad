@@ -19,7 +19,7 @@ public class AboutActivity extends AppCompatActivity {
         setContentView(R.layout.activity_about);
 
         // enable for testing
-        if (false) {
+        if (true) {
             demoBarChart();
         }
     }
@@ -85,6 +85,5 @@ public class AboutActivity extends AppCompatActivity {
         barChart.setData(data);
         barChart.animateY(5000);
     }
-
 
 }
