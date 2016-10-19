@@ -9,6 +9,6 @@
         \nCopyright and Disclaimer
     </string>
     <string name="title_activity_stats">Statistics</string>
-    <string name="action_settings">Settings</string>
-    <string name="section_format">Hello World from section: %1$d \n%2$s</string>
+    <string name="action_settings">dummy</string>
+    <string name="section_format">Dice rolls by: %1$s \n%2$s</string>
 </resources>

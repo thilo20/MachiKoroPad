@@ -6,6 +6,9 @@ MachiKoroPad gives you evidence that your strategy is awesome - but fate just wa
 Please read this forum thread to get the idea: 
 https://boardgamegeek.com/thread/1634274/machi-koro-pad-supporting-android-app
 
+## try the app:
+Find ready-to-use APK files for released versions under /apk
+
 ## development and installation:
 1.	Install Android Studio
 2.	Download this project to your computer
@@ -20,9 +23,10 @@ Stable versions might be provided via app store in the future.
 3.	Try the app, give feedback!
 
 ## To Do, features by priority:
-- implement main cycle and UI
+- remove unused template stuff
 - show stats as graphics red/green
+- custom player names
+- player color highlighting
 - implement language support DE/EN
-- release alpha
 - implement card buy and income calculation
 - implement Harbour extension, cards and logic

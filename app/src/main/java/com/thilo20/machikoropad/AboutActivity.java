@@ -1,5 +1,6 @@
 package com.thilo20.machikoropad;
 
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -10,6 +11,7 @@ import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class AboutActivity extends AppCompatActivity {
 
@@ -19,7 +21,7 @@ public class AboutActivity extends AppCompatActivity {
         setContentView(R.layout.activity_about);
 
         // enable for testing
-        if (true) {
+        if (false) {
             demoBarChart();
         }
     }
@@ -80,9 +82,30 @@ public class AboutActivity extends AppCompatActivity {
         */
 
         BarData data = new BarData(labels, dataset);
-
-        dataset.setColors(ColorTemplate.COLORFUL_COLORS);
         barChart.setData(data);
+
+        // COLOR PLAYGROUND //
+        // predefined
+        dataset.setColors(ColorTemplate.COLORFUL_COLORS);
+
+        // not working as expected
+        dataset.setColor(R.color.colorSingleRoll); // unresolved gray!
+        // recommended here: https://github.com/PhilJay/MPAndroidChart/wiki/Setting-Colors
+        // getResources().getColor(R.color.colorSingleRoll, getTheme()); // requires API level 23, not 15.. unuseable
+
+        // from code
+        int color = Color.rgb(255, 0, 0);
+        dataset.setColor(color); // red
+
+        // explicit color resolving with util
+        List<Integer> colors = ColorTemplate.createColors(getResources(), new int[]{R.color.colorSingleRoll, R.color.colorDoubleRoll});
+        dataset.setColors(new int[]{R.color.colorSingleRoll, color}); // 1: unresolved to gray, 2: red
+        dataset.setColors(colors); // mixed, alternating color
+
+        // set single resolved color
+        dataset.setColor(colors.get(0)); // resolved R.color.colorSingleRoll
+        // dataset.setColor(colors.get(1)); // resolved R.color.colorDoubleRoll
+
         barChart.animateY(5000);
     }
 

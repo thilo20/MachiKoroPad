@@ -1,5 +1,6 @@
 package com.thilo20.machikoropad;
 
+import android.graphics.Color;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -28,6 +29,7 @@ import com.thilo20.dicecount.SingleRoll;
 import com.thilo20.machikoro.Game;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class StatsActivity extends AppCompatActivity {
 
@@ -66,18 +68,6 @@ public class StatsActivity extends AppCompatActivity {
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
-
-        // disable unused action example
-        if (false) {
-            FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-            fab.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
-                }
-            });
-        }
     }
 
 
@@ -141,10 +131,19 @@ public class StatsActivity extends AppCompatActivity {
             initStats(getArguments().getInt(ARG_SECTION_NUMBER));
 
             TextView textView = (TextView) rootView.findViewById(R.id.section_label);
+
+            String playerName;
+            int playerIdx = getArguments().getInt(ARG_SECTION_NUMBER);
+            if (playerIdx == 0) {
+                playerName = "all players";
+            } else {
+                playerName = game.getPlayer(playerIdx - 1).getName();
+            }
+
             // fill text using format string template from resource
             textView.setText(getString(
                     R.string.section_format,
-                    getArguments().getInt(ARG_SECTION_NUMBER),
+                    playerName,
                     createStatsText(getArguments().getInt(ARG_SECTION_NUMBER))
             ));
 
@@ -208,12 +207,12 @@ public class StatsActivity extends AppCompatActivity {
                 // fill single rolls, 1..6
                 int[] counts = sr.getCounts();
                 for (int i = 0; i < counts.length; i++) {
-                    entries.add(new BarEntry(counts[i], i + 1));
+                    entries.add(new BarEntry(counts[i], i));
                 }
                 // fill double roll sums, 2..12
                 counts = dr.getSumCount();
                 for (int i = 0; i < counts.length; i++) {
-                    entries2.add(new BarEntry(counts[i], i + 2));
+                    entries2.add(new BarEntry(counts[i], i + 1));
                 }
 
                 BarDataSet dataset = new BarDataSet(entries, "# of single rolls: " + sr.getTotal());
@@ -228,7 +227,12 @@ public class StatsActivity extends AppCompatActivity {
                 BarData data = new BarData(labels, dataset);
                 data.addDataSet(dataset2);
 
-                dataset.setColors(ColorTemplate.COLORFUL_COLORS);
+                // explicit color resolving with util, see AboutActivity#demoBarChart
+                List<Integer> colors = ColorTemplate.createColors(getResources(), new int[]{R.color.colorSingleRoll, R.color.colorDoubleRoll});
+                //dataset.setColors(ColorTemplate.COLORFUL_COLORS);
+                dataset.setColor(colors.get(0));
+                dataset2.setColor(colors.get(1));
+
                 barChart.setData(data);
                 barChart.animateY(1000);
             }
