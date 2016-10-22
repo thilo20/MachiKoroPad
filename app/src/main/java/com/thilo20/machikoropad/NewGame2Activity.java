@@ -13,6 +13,10 @@ import android.widget.TextView;
 
 import com.thilo20.machikoro.Game;
 
+import static android.text.InputType.TYPE_CLASS_TEXT;
+import static android.text.InputType.TYPE_TEXT_VARIATION_PERSON_NAME;
+import static com.thilo20.machikoropad.R.dimen.activity_vertical_margin;
+
 public class NewGame2Activity extends AppCompatActivity {
 
     Game game;
@@ -28,6 +32,7 @@ public class NewGame2Activity extends AppCompatActivity {
         LinearLayout linLayout = new LinearLayout(this);
         // specifying vertical orientation
         linLayout.setOrientation(LinearLayout.VERTICAL);
+        linLayout.setPadding(64, 16, 64, 16);
         // creating LayoutParams
         ActionBar.LayoutParams linLayoutParam = new ActionBar.LayoutParams(ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.MATCH_PARENT);
         // set LinearLayout as a root element of the screen
@@ -46,6 +51,9 @@ public class NewGame2Activity extends AppCompatActivity {
             ed.setId(i);
             ed.setText(game.getPlayer(i).getName());
             ed.setLayoutParams(lpView);
+            ed.setEms(20); // chars allowed for player name
+            ed.setSelectAllOnFocus(true);
+            ed.setInputType(TYPE_CLASS_TEXT | TYPE_TEXT_VARIATION_PERSON_NAME);
             linLayout.addView(ed);
         }
 
