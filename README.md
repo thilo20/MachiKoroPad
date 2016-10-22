@@ -8,10 +8,11 @@ https://boardgamegeek.com/thread/1634274/machi-koro-pad-supporting-android-app
 
 ## try the app!
 Install [MachiKoroPad latest release] (https://github.com/thilo20/MachiKoroPad/releases/latest) on your Android device and play a game of Machi Koro with your friends!
+
 (Find ready-to-use APK files for released versions also under /apk, you might have to check "install from unknown sources" on your device when prompted)
 
 ## :smile: MachiKoroPad:
-If you like MackiKoroPad, do any or all of:
+If you like MachiKoroPad, do any or all of:
 
 - spread the word: tell friends! 
 - share your experience on [boardgamegeek forum] (https://boardgamegeek.com/article/23991095)
@@ -24,14 +25,17 @@ If you like MackiKoroPad, do any or all of:
 If you are a curious developer...
  
 SDK, build and installation:
+
 1.	Install Android Studio
 2.	Download this project to your computer
 3.	Open project with Android Studio
 
 development state: beta (basic functional, not harmful!)
+
 Future versions might be provided via app store.
 
 Instructions to run:
+
 1.	Enable dev-mode on your Android device, check "install from unknown sources"
 2.  Start app via Android Studio, use your USB-connected Android device (or an emulator)
 3.	Try the app, give feedback!
