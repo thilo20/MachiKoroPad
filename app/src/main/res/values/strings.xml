@@ -1,12 +1,17 @@
 <resources>
-    <string name="app_name">Machikoro pad</string>
-    <string name="app_about">About Machikoro pad:
-        \nMachikoro pad is intended to be used while playing the realworld board/card game Machikoro.
-        Each turn, you enter your dice roll result and what card you bought - the app keeps track of each numPlayers cards and credits, produces various statistics and predicts who will win!
+    <string name="app_name">MachiKoroPad</string>
+    <string name="app_about">About MachiKoroPad:
+        \nMachiKoroPad is intended to be used while playing the realworld board/card game Machi Koro.
+        Each turn, you enter your dice roll result and what card you bought - the app keeps track of each player\'s cards and credits, produces various statistics and predicts who will win!
         \n
-        \nVersion: 1.0
+        \nBoardgame forum:
+        \nsee https://boardgamegeek.com/article/23991095
+        \n
         \nAuthor: thilo20
-        \nCopyright and Disclaimer
+        \ncontact me via machikoro@e.mail.de
+        \n
+        \nCopyright and Disclaimer:
+        \nsee https://github.com/thilo20/MachiKoroPad
     </string>
     <string name="title_activity_stats">Statistics</string>
     <string name="action_settings">dummy</string>

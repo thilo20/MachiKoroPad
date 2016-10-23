@@ -3,6 +3,10 @@ package com.thilo20.machikoropad;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.appcompat.*;
+import android.text.Html;
+import android.view.View;
+import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarData;
@@ -20,9 +24,17 @@ public class AboutActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
 
+        // set "app version" info text
+        TextView tv = (TextView) findViewById(R.id.versionName);
+        tv.setText(getResources().getString(R.string.app_name) + " " + BuildConfig.VERSION_NAME);
+        
         // enable for testing
         if (false) {
             demoBarChart();
+        } else {
+            // hide UI component
+            BarChart barChart = (BarChart) findViewById(R.id.chart);
+            barChart.setVisibility(View.INVISIBLE);
         }
     }
 

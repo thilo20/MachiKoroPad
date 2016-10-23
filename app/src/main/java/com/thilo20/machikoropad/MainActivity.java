@@ -46,6 +46,10 @@ public class MainActivity extends AppCompatActivity {
         Button btShowStats = (Button) findViewById(R.id.btStats);
         btShowStats.setEnabled(game != null);
 
+        // disable "settings" because unused
+        Button btSettings = (Button) findViewById(R.id.btSettings);
+        btSettings.setEnabled(false);
+
         initDiceRoller();
     }
 
