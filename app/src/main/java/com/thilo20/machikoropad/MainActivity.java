@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
         initDiceRoller();
 
         // enable for debug/testing only
-        if (false) {
+        if (BuildConfig.DEBUG) {
             Button btTest = (Button) findViewById(R.id.btTest);
             btTest.setOnClickListener(new View.OnClickListener() {
                 @Override
