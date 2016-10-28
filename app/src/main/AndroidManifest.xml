@@ -17,6 +17,7 @@
         </activity>
         <activity android:name=".AboutActivity" />
         <activity android:name=".NewGameActivity" />
+        <activity android:name=".NewGame2Activity" />
         <activity
             android:name=".RollDiceActivity"
             android:parentActivityName=".MainActivity">
@@ -36,7 +37,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.thilo20.machikoropad.MainActivity" />
         </activity>
-        <activity android:name=".NewGame2Activity"></activity>
+        <activity android:name=".TestActivity" />
     </application>
 
 </manifest>

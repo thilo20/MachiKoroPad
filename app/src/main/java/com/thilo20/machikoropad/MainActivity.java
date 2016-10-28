@@ -51,6 +51,22 @@ public class MainActivity extends AppCompatActivity {
         btSettings.setEnabled(false);
 
         initDiceRoller();
+
+        // enable for debug/testing only
+        if (false) {
+            Button btTest = (Button) findViewById(R.id.btTest);
+            btTest.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(MainActivity.this, TestActivity.class);
+                    startActivity(intent);
+                }
+            });
+        } else {
+            // hide button from UI
+            Button btTest = (Button) findViewById(R.id.btTest);
+            btTest.setVisibility(View.INVISIBLE);
+        }
     }
 
     public void startNewGame(View view) {

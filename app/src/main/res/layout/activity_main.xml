@@ -65,5 +65,14 @@
             android:layout_weight="0.16"
             android:onClick="HandleClick"
             android:src="@drawable/dice3droll" />
+
+        <Button
+            android:layout_width="118dp"
+            android:layout_height="wrap_content"
+            android:text="Test"
+            android:id="@+id/btTest"
+            android:layout_gravity="center_horizontal" />
+
     </LinearLayout>
+
 </RelativeLayout>
