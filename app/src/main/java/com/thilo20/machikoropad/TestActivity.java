@@ -14,6 +14,10 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Playground used for debug/testing only, not part of release.
+ * For activation see MainActivity.onCreate
+ */
 public class TestActivity extends AppCompatActivity {
 
     @Override
@@ -23,7 +27,8 @@ public class TestActivity extends AppCompatActivity {
 
         // enable for testing
         if (true) {
-            demoBarChart();
+            // demoBarChart();
+            demoBarChartStacked();
         } else {
             // hide UI component
             BarChart barChart = (BarChart) findViewById(R.id.chart);
@@ -114,4 +119,55 @@ public class TestActivity extends AppCompatActivity {
         barChart.animateY(5000);
     }
 
+    /**
+     * Demonstrates showing a stacekd bar chart using lib MPAndroidChart.
+     * source url=https://www.numetriclabz.com/android-bar-chart-using-mpandroidchart-library-tutorial/
+     */
+    private void demoBarChartStacked() {
+        // To make vertical bar chart, initialize graph id this way<br />
+        BarChart barChart = (BarChart) findViewById(R.id.chart);
+
+        ArrayList<BarEntry> entries = new ArrayList<>();
+        entries.add(new BarEntry(new float[]{4f, 1f}, 0));
+        entries.add(new BarEntry(new float[]{8f, 1f}, 1));
+        entries.add(new BarEntry(new float[]{6f, 1f}, 2));
+        entries.add(new BarEntry(new float[]{12f, 1f}, 3));
+        entries.add(new BarEntry(new float[]{18f, 1f}, 4));
+        entries.add(new BarEntry(new float[]{9f, 10f}, 5));
+
+        BarDataSet dataset = new BarDataSet(entries, "# of Calls");
+        dataset.setStackLabels(new String[]{"day", "night"});
+
+        ArrayList<String> labels = new ArrayList<String>();
+        labels.add("January");
+        labels.add("February");
+        labels.add("March");
+        labels.add("April");
+        labels.add("May");
+        labels.add("June");
+
+        BarData data = new BarData(labels, dataset);
+        barChart.setData(data);
+        barChart.setDescription("A nice description explaining stuff");
+
+        // COLOR PLAYGROUND //
+        // predefined
+        dataset.setColors(ColorTemplate.COLORFUL_COLORS);
+
+        // not working as expected
+        dataset.setColor(R.color.colorSingleRoll); // unresolved gray!
+        // recommended here: https://github.com/PhilJay/MPAndroidChart/wiki/Setting-Colors
+        // getResources().getColor(R.color.colorSingleRoll, getTheme()); // requires API level 23, not 15.. unuseable
+
+        // from code
+        int color = Color.rgb(255, 0, 0);
+        dataset.setColor(color); // red
+
+        // explicit color resolving with util
+        List<Integer> colors = ColorTemplate.createColors(getResources(), new int[]{R.color.colorSingleRoll, R.color.colorDoubleRoll});
+        dataset.setColors(new int[]{R.color.colorSingleRoll, color}); // 1: unresolved to gray, 2: red
+        dataset.setColors(colors); // mixed, alternating color
+
+        // barChart.animateY(5000);
+    }
 }
