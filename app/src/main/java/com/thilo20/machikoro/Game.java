@@ -13,14 +13,15 @@ public class Game implements Serializable {
     int numPlayers = 2;
     boolean harbour;
 
-    // in game
-    int currentPlayer = 0;
-    int step = 0; // 0: roll dice, 1: buy card
-    boolean hasExtraTurn = false;
-
     // stats
     int turns = 0;
     int rounds = 0;
+
+    // in game
+    int currentPlayer = 0;
+    int step = 0; // 0: roll dice, 1: buy card
+    boolean extraTurnNext = false; // true if next turn is an extra turn
+    boolean extraTurnNow = false; // true if current turn is an extra turn
 
     // current game instance
     public static Game instance=null;
@@ -87,12 +88,35 @@ public class Game implements Serializable {
         this.rounds = rounds;
     }
 
+    /**
+     * enables extra turn for the current player as next turn
+     */
+    public void activateExtraTurn() {
+        extraTurnNext = true;
+    }
+
+    /**
+     * true if the current turn is an extra turn
+     */
+    public boolean isExtraTurnNow() {
+        return extraTurnNow;
+    }
+
     public void nextTurn() {
         turns++;
-        if (!hasExtraTurn) nextPlayer();
+        if (extraTurnNext) {
+            // next turn is the extra turn
+            extraTurnNow = true;
+            extraTurnNext = false;
+        } else {
+            nextPlayer();
+        }
     }
 
     public void nextPlayer() {
+        extraTurnNow = false;
+        extraTurnNext =false;
+
         currentPlayer++;
         if (currentPlayer >= numPlayers) {
             currentPlayer = 0;
@@ -100,8 +124,9 @@ public class Game implements Serializable {
         }
     }
 
-    public void initGame(int numPlayers) {
+    public void initGame(int numPlayers, boolean harbour) {
         this.numPlayers = numPlayers;
+        this.harbour = harbour;
         players = new Player[numPlayers];
 
         if (numPlayers > 0) {

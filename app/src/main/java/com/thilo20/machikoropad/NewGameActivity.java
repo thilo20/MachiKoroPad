@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 
@@ -41,9 +42,13 @@ public class NewGameActivity extends AppCompatActivity {
             default:
         }
 
+        // check rules
+        CheckBox cb = (CheckBox) findViewById(R.id.cbHarbour);
+        boolean harbour = cb.isChecked();
+
         // init game
         Game game = new Game();
-        game.initGame(players);
+        game.initGame(players, harbour);
         Game.setInstance(game);
 
         // set player names

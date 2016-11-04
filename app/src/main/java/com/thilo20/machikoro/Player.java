@@ -81,4 +81,22 @@ public class Player {
     public void setUsesDoubleRoll(boolean usesDoubleRoll) {
         this.myUsesDoubleRoll = usesDoubleRoll;
     }
+
+    public boolean hasHarbour() {
+        for (Card c : cards) {
+            if (c.getName().equals(Card.cardtype.HARBOUR)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean hasAmusementPark() {
+        for (Card c : cards) {
+            if (c.getName().equals(Card.cardtype.AMUSEMENT_PARK)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

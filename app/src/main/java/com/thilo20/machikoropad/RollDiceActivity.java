@@ -1,17 +1,18 @@
 package com.thilo20.machikoropad;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.AndroidCharacter;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
-import com.thilo20.dicecount.SingleRoll;
+import com.thilo20.machikoro.Card;
 import com.thilo20.machikoro.Game;
-import com.thilo20.machikoro.Player;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -37,10 +38,19 @@ public class RollDiceActivity extends AppCompatActivity {
         // get game
         game = Game.getInstance();
 
+        // hide checkbox "Harbour" if playing without extension
+        if (!game.isHarbour()) {
+            CheckBox cbHarbour = (CheckBox) findViewById(R.id.cbHarbour);
+            cbHarbour.setVisibility(View.INVISIBLE);
+        }
+
         // get player state
         TextView tvPlayer = (TextView) findViewById(R.id.textView3);
-        tvPlayer.setText(game.getCurrentPlayer().getName() + " würfelt");
-        useDoubleRoll = game.getCurrentPlayer().usesDoubleRoll();
+        String caption = game.getCurrentPlayer().getName() + " würfelt";
+        if (game.isExtraTurnNow()) {
+            caption += " extra!";
+        }
+        tvPlayer.setText(caption);
 
         // update stats text
         TextView tvStats=(TextView)findViewById(R.id.textViewStats);
@@ -147,11 +157,33 @@ public class RollDiceActivity extends AppCompatActivity {
         });
         tb.setTextOn("use single roll");
         tb.setTextOff("use double roll");
-        // has player used double roll last turn?
-        tb.setChecked(useDoubleRoll);
 
+        // has player used double roll last turn?
+        useDoubleRoll = game.getCurrentPlayer().usesDoubleRoll();
+        tb.setChecked(useDoubleRoll);
         // init dice2 matching toggle
         toggleDice2(null);
+
+        // wire checkboxes
+        CheckBox cbHarbour = (CheckBox) findViewById(R.id.cbHarbour);
+        cbHarbour.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // add Harbour card
+                game.getCurrentPlayer().getCards().add(Card.forName(Card.cardtype.HARBOUR));
+            }
+        });
+        cbHarbour.setChecked(game.getCurrentPlayer().hasHarbour());
+
+        CheckBox cbAmusementPark = (CheckBox) findViewById(R.id.cbExtraTurn);
+        cbAmusementPark.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // add AmusementPark card
+                game.getCurrentPlayer().getCards().add(Card.forName(Card.cardtype.AMUSEMENT_PARK));
+            }
+        });
+        cbAmusementPark.setChecked(game.getCurrentPlayer().hasAmusementPark());
     }
 
     public void diceRolled(View view, int number) {
@@ -178,6 +210,64 @@ public class RollDiceActivity extends AppCompatActivity {
         nextAction();
     }
 
+    private void checkHarbour() {
+        // Harbour: test for sum>=10, ask for "+2"
+        if (game.isHarbour()
+                && game.getCurrentPlayer().hasHarbour()
+                && (dice1 + dice2 >= 10)) {
+            // show dialog
+            AlertDialog.Builder builder = new AlertDialog.Builder(RollDiceActivity.this);
+            builder.setMessage("Harbour: +2 ?");
+            builder.setIcon(android.R.drawable.ic_dialog_alert);
+            builder.setCancelable(false);
+            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Logger.getLogger(getClass().getName()).log(Level.INFO, "harbour used, sum=" + (dice1 + dice2 + 2));
+                    checkExtraTurn();
+                }
+            });
+            builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Logger.getLogger(getClass().getName()).log(Level.INFO, "harbour not used, sum=" + (dice1 + dice2));
+                    checkExtraTurn();
+                }
+            });
+            AlertDialog alert = builder.create();
+            alert.show();
+        } else {
+            checkExtraTurn();
+        }
+    }
+
+    private void checkExtraTurn() {
+        // AmusementPark: test for doublets, give extra turn
+        if (!game.isExtraTurnNow()
+                && game.getCurrentPlayer().hasAmusementPark()
+                && dice1 == dice2) {
+            // provide extra turn
+            Logger.getLogger(getClass().getName()).log(Level.INFO, "Extra turn granted");
+            game.activateExtraTurn();
+
+            // show info dialog
+            AlertDialog.Builder builder = new AlertDialog.Builder(RollDiceActivity.this);
+            builder.setMessage("AmusementPark/Doublets: Extra turn!");
+            builder.setIcon(android.R.drawable.ic_dialog_alert);
+            builder.setCancelable(false);
+            builder.setPositiveButton("Nice", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    nextTurn();
+                }
+            });
+            AlertDialog alert = builder.create();
+            alert.show();
+        } else {
+            // no extra turn provided
+            nextTurn();
+        }
+    }
 
     private void nextAction() {
         Logger log = Logger.getLogger(getClass().getName());
@@ -190,9 +280,13 @@ public class RollDiceActivity extends AppCompatActivity {
             // increment counter
             game.getCurrentPlayer().getSingleRolls().increment(dice1);
         }
-
-        // proceed
+        // remember choice
         game.getCurrentPlayer().setUsesDoubleRoll(useDoubleRoll);
+
+        checkHarbour();
+    }
+
+    private void nextTurn() {
         game.nextTurn();
 
         Intent intent = new Intent(this, RollDiceActivity.class);

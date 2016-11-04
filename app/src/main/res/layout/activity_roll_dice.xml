@@ -167,4 +167,24 @@
         android:layout_alignParentBottom="true"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
 
+    <CheckBox
+        android:text="A.Park"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cbExtraTurn"
+        android:layout_alignBaseline="@+id/toggleButton"
+        android:layout_alignBottom="@+id/toggleButton"
+        android:layout_toRightOf="@+id/toggleButton"
+        android:layout_toEndOf="@+id/toggleButton" />
+
+    <CheckBox
+        android:text="Harbour"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cbHarbour"
+        android:layout_alignBaseline="@+id/toggleButton"
+        android:layout_alignBottom="@+id/toggleButton"
+        android:layout_toRightOf="@+id/cbExtraTurn"
+        android:layout_toEndOf="@+id/cbExtraTurn" />
+
 </RelativeLayout>
