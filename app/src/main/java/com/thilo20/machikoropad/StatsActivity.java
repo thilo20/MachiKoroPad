@@ -25,6 +25,7 @@ import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.thilo20.dicecount.DoubleRoll;
+import com.thilo20.dicecount.RollResult;
 import com.thilo20.dicecount.SingleRoll;
 import com.thilo20.machikoro.Game;
 
@@ -106,6 +107,7 @@ public class StatsActivity extends AppCompatActivity {
         // stats for this page
         SingleRoll sr;
         DoubleRoll dr;
+        RollResult rr;
 
         public PlaceholderFragment() {
         }
@@ -161,14 +163,17 @@ public class StatsActivity extends AppCompatActivity {
                     // create aggregate stats
                     sr = new SingleRoll();
                     dr = new DoubleRoll();
+                    rr = new RollResult();
                     for (int i = 0; i < game.getNumPlayers(); i++) {
                         sr.add(game.getPlayer(i).getSingleRolls());
                         dr.add(game.getPlayer(i).getDoubleRolls());
+                        rr.add(game.getPlayer(i).getRollResult());
                     }
                 } else {
                     // use player stats
                     sr = game.getPlayer(sectionNumber - 1).getSingleRolls();
                     dr = game.getPlayer(sectionNumber - 1).getDoubleRolls();
+                    rr = game.getPlayer(sectionNumber - 1).getRollResult();
                 }
             }
         }
@@ -178,16 +183,17 @@ public class StatsActivity extends AppCompatActivity {
                 StringBuffer sb = new StringBuffer();
 
                 if (sectionNumber == 0) {
-                    sb.append("\nGame progress:");
+                    sb.append("Game progress:");
                     sb.append(" Round " + game.getRounds());
                     sb.append(", Turn " + game.getTurns());
                     sb.append("\n");
                 }
 
+                sb.append("Roll results: 1..14\n");
+                sb.append(rr.toString());
                 sb.append("\nSingle rolls: 1..6\n");
                 sb.append(sr.toString());
-                sb.append("\n");
-                sb.append("\nDouble roll sums: 2..12\n");
+                sb.append("\nDouble rolls: 2..12\n");
                 sb.append(dr.toString());
 
                 return sb.toString();

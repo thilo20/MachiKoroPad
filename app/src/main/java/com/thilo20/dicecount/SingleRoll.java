@@ -82,10 +82,8 @@ public class SingleRoll {
 
     @Override
     public String toString() {
-        return "SingleRoll{" +
-                "total=" + getTotal() +
-                " count=" + Arrays.toString(count) +
-                '}';
+        return "total=" + getTotal() +
+                " count=" + Arrays.toString(count);
     }
 
 }

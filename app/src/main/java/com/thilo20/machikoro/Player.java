@@ -3,6 +3,7 @@ package com.thilo20.machikoro;
 import android.graphics.Color;
 
 import com.thilo20.dicecount.DoubleRoll;
+import com.thilo20.dicecount.RollResult;
 import com.thilo20.dicecount.SingleRoll;
 
 import java.util.ArrayList;
@@ -27,6 +28,7 @@ public class Player {
     // game specific
     int coins = 0;
     List<Card> cards = new ArrayList<>();
+    RollResult rollResult = new RollResult();
 
     public Player(String name, int number, int color) {
         this.name = name;
@@ -64,6 +66,10 @@ public class Player {
 
     public DoubleRoll getDoubleRolls() {
         return doubleRolls;
+    }
+
+    public RollResult getRollResult() {
+        return rollResult;
     }
 
     public int getCoins() {

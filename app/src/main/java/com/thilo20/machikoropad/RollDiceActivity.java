@@ -22,10 +22,9 @@ public class RollDiceActivity extends AppCompatActivity {
     Game game;
 
     // current dice roll
-    int dice1 = -1;
-    int dice2 = -1;
+    int dice1 = 0;
+    int dice2 = 0;
     boolean useDoubleRoll;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -190,8 +189,8 @@ public class RollDiceActivity extends AppCompatActivity {
         dice1 = number;
 
         if (useDoubleRoll) {
-            // test if dice2 has already been clicked
-            if (dice2 < 0) {
+            // test if dice2 has not been clicked yet
+            if (dice2 < 1) {
                 return;
             }
         }
@@ -202,8 +201,8 @@ public class RollDiceActivity extends AppCompatActivity {
     public void dice2Rolled(View view, int number) {
         dice2 = number;
 
-        // test if dice1 has already been clicked
-        if (dice1 < 0) {
+        // test if dice1 has not been clicked yet
+        if (dice1 < 1) {
             return;
         }
 
@@ -217,13 +216,15 @@ public class RollDiceActivity extends AppCompatActivity {
                 && (dice1 + dice2 >= 10)) {
             // show dialog
             AlertDialog.Builder builder = new AlertDialog.Builder(RollDiceActivity.this);
-            builder.setMessage("Harbour: +2 ?");
+            builder.setTitle("Use Harbour?");
+            builder.setMessage((dice1 + dice2) + " + 2 = " + (dice1 + dice2 + 2));
             builder.setIcon(android.R.drawable.ic_dialog_alert);
             builder.setCancelable(false);
             builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     Logger.getLogger(getClass().getName()).log(Level.INFO, "harbour used, sum=" + (dice1 + dice2 + 2));
+                    game.getCurrentPlayer().getRollResult().increment(dice1 + dice2 + 2);
                     checkExtraTurn();
                 }
             });
@@ -231,12 +232,14 @@ public class RollDiceActivity extends AppCompatActivity {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     Logger.getLogger(getClass().getName()).log(Level.INFO, "harbour not used, sum=" + (dice1 + dice2));
+                    game.getCurrentPlayer().getRollResult().increment(dice1 + dice2);
                     checkExtraTurn();
                 }
             });
             AlertDialog alert = builder.create();
             alert.show();
         } else {
+            game.getCurrentPlayer().getRollResult().increment(dice1 + dice2);
             checkExtraTurn();
         }
     }
@@ -252,7 +255,8 @@ public class RollDiceActivity extends AppCompatActivity {
 
             // show info dialog
             AlertDialog.Builder builder = new AlertDialog.Builder(RollDiceActivity.this);
-            builder.setMessage("AmusementPark/Doublets: Extra turn!");
+            builder.setTitle("Amusement Park!");
+            builder.setMessage("You rolled doublets: Extra turn!");
             builder.setIcon(android.R.drawable.ic_dialog_alert);
             builder.setCancelable(false);
             builder.setPositiveButton("Nice", new DialogInterface.OnClickListener() {

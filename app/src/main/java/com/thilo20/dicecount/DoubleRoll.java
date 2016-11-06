@@ -72,12 +72,10 @@ public class DoubleRoll {
 
     @Override
     public String toString() {
-        return "DoubleRoll{" +
-                "total="+getTotal()+
+        return "total=" + getTotal() +
 //too much info:                " count=" + Arrays.toString(count) +
                 " sums=" + Arrays.toString(getSumCount()) +
-                " doublets=" + getDoubletsCount() +
-                '}';
+                " doublets=" + getDoubletsCount();
     }
 
     /** calculates counter for sum of roll 1+2, index 0..10 for sum 2..12 */
