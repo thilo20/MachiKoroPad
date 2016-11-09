@@ -14,7 +14,7 @@ import java.util.Locale;
  * Android entry point.
  */
 public class InitActivity extends AppCompatActivity {
-
+ 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
