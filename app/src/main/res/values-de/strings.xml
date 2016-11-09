@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MachiKoroPad</string>
+    <string name="app_about">Über MachiKoroPad:
+        \nMachiKoroPad benutzt Du nebenbei während Du das Kartenspiel Machi Koro mit Freunden spielst.
+        In jedem Zug tippst Du Dein Würfelergebnis ein und welche Karte Du kaufst - die App erfasst Würfelwürfe, Karten und Geld jedes Spielers und erzeugt Statistiken!
+        \n
+        \nBrettspiel-Forum:
+        \nsee https://boardgamegeek.com/article/23991095
+        \n
+        \nAutor: thilo20
+        \nKontakt via machikoro@e.mail.de
+        \n
+        \nCopyright and Disclaimer:
+        \nsee https://github.com/thilo20/MachiKoroPad
+    </string>
+    <string name="title_activity_stats">Statistik</string>
+    <string name="action_settings">dummy</string>
+    <string name="section_format">Würfelergebnis von: %1$s   %2$s</string>
+    <string name="select_english">Englisch</string>
+    <string name="select_german">Deutsch</string>
+    <string name="select_language">Sprache auswählen:</string>
+    <string name="about">Info</string>
+    <string name="continue_game">Spiel fortsetzen</string>
+    <string name="dice_image">Würfel</string>
+    <string name="new_game">Neues Spiel</string>
+    <string name="settings">Einstellungen</string>
+    <string name="statistics">Statistik</string>
+    <string name="test">Test DE</string>
+</resources>

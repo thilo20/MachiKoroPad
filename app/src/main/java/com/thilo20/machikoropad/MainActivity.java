@@ -2,6 +2,8 @@ package com.thilo20.machikoropad;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Handler;
@@ -17,6 +19,7 @@ import android.widget.ImageView;
 
 import com.thilo20.machikoro.Game;
 
+import java.util.Locale;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -40,7 +43,8 @@ import java.util.TimerTask;
  */
 
 /**
- * App main, entry point for Android.
+ * App main screen.
+ * For the entry point for Android see InitActivity.
  */
 public class MainActivity extends AppCompatActivity {
 
@@ -69,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
 
         // disable "settings" because unused
         Button btSettings = (Button) findViewById(R.id.btSettings);
-        btSettings.setEnabled(false);
+        // btSettings.setEnabled(false);
 
         initDiceRoller();
 
@@ -132,8 +136,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void openSettings(View view) {
-        Intent intent = new Intent(this, AboutActivity.class);
+    public void showSettings(View view) {
+        Intent intent = new Intent(this, SettingsActivity.class);
         startActivity(intent);
     }
 
@@ -226,4 +230,11 @@ public class MainActivity extends AppCompatActivity {
         timer.cancel();
     }
 
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        // your code here, you can use newConfig.locale if you need to check the language
+        // or just re-set all the labels to desired string resource
+        setContentView(R.layout.activity_main);
+    }
 }

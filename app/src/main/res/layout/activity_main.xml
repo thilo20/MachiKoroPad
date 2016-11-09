@@ -19,57 +19,59 @@
         android:weightSum="1">
 
         <Button
-            android:layout_width="127dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="New game"
+            android:text="@string/new_game"
             android:id="@+id/btNewGame"
             android:layout_gravity="center_horizontal"
             android:onClick="startNewGame"/>
 
         <Button
-            android:layout_width="165dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Continue Game"
+            android:text="@string/continue_game"
             android:id="@+id/btContinueGame"
             android:layout_gravity="center_horizontal"
             android:onClick="continueGame"/>
 
         <Button
-            android:layout_width="131dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Statistics"
+            android:text="@string/statistics"
             android:id="@+id/btStats"
             android:layout_gravity="center_horizontal"
             android:onClick="showStats"/>
 
         <Button
-            android:layout_width="119dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Settings"
+            android:text="@string/settings"
             android:id="@+id/btSettings"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            android:onClick="showSettings" />
 
         <Button
-            android:layout_width="118dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="About"
+            android:text="@string/about"
             android:id="@+id/btAbout"
             android:layout_gravity="center_horizontal"
             android:onClick="showAbout"/>
 
         <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:id="@+id/imageView1"
             android:layout_gravity="center_horizontal"
             android:layout_weight="0.16"
             android:onClick="HandleClick"
-            android:src="@drawable/dice3droll" />
+            android:src="@drawable/dice3droll"
+            android:contentDescription="@string/dice_image" />
 
         <Button
-            android:layout_width="118dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Test"
+            android:text="@string/test"
             android:id="@+id/btTest"
             android:layout_gravity="center_horizontal" />
 
