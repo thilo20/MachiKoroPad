@@ -16,7 +16,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:text="Spieler1 würfelt"
+        android:text="@string/roll_dice"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <RadioGroup
@@ -85,7 +85,8 @@
         android:layout_toEndOf="@+id/dice5" />
 
     <ToggleButton
-        android:text="use two dice"
+        android:textOff="@string/toggle_double_roll"
+        android:textOn="@string/toggle_single_roll"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/w1"
@@ -168,7 +169,7 @@
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
 
     <CheckBox
-        android:text="A.Park"
+        android:text="@string/amusement_park"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/cbExtraTurn"
@@ -178,7 +179,7 @@
         android:layout_toEndOf="@+id/toggleButton" />
 
     <CheckBox
-        android:text="Harbour"
+        android:text="@string/harbour"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/cbHarbour"

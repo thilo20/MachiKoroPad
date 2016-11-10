@@ -26,4 +26,14 @@
     <string name="about">About</string>
     <string name="test">Test EN</string>
     <string name="dice_image">dice</string>
+    <string name="enter_player_names">Enter player names:</string>
+    <string name="num_players">Players</string>
+    <string name="rules">Rules</string>
+    <string name="rule_harbour">with Harbour extension</string>
+    <string name="start">START</string>
+    <string name="roll_dice">%1$s rolls</string>
+    <string name="toggle_double_roll">use two dice</string>
+    <string name="amusement_park">A.Park</string>
+    <string name="harbour">Harbour</string>
+    <string name="toggle_single_roll">use one dice</string>
 </resources>

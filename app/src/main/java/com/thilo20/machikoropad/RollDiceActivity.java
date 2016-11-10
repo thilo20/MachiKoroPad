@@ -45,7 +45,7 @@ public class RollDiceActivity extends AppCompatActivity {
 
         // get player state
         TextView tvPlayer = (TextView) findViewById(R.id.textView3);
-        String caption = game.getCurrentPlayer().getName() + " würfelt";
+        String caption = getResources().getString(R.string.roll_dice, game.getCurrentPlayer().getName());
         if (game.isExtraTurnNow()) {
             caption += " extra!";
         }
@@ -154,8 +154,6 @@ public class RollDiceActivity extends AppCompatActivity {
                 toggleDice2(v);
             }
         });
-        tb.setTextOn("use single roll");
-        tb.setTextOff("use double roll");
 
         // has player used double roll last turn?
         useDoubleRoll = game.getCurrentPlayer().usesDoubleRoll();

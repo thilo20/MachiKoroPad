@@ -11,9 +11,11 @@ import android.widget.RadioGroup;
 
 import com.thilo20.machikoro.Game;
 
+/**
+ * Initializes a new game asking for number of players and rules.
+ * {@link NewGame2Activity} follows.
+ */
 public class NewGameActivity extends AppCompatActivity {
-
-    public final static String EXTRA_MESSAGE = "com.thilo20.machikoropad.MESSAGE";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

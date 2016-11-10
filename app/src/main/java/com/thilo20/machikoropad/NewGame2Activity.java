@@ -1,9 +1,11 @@
 package com.thilo20.machikoropad;
 
 import android.content.Intent;
+import android.support.v4.view.MarginLayoutParamsCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.AppCompatButton;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -15,8 +17,10 @@ import com.thilo20.machikoro.Game;
 
 import static android.text.InputType.TYPE_CLASS_TEXT;
 import static android.text.InputType.TYPE_TEXT_VARIATION_PERSON_NAME;
-import static com.thilo20.machikoropad.R.dimen.activity_vertical_margin;
 
+/**
+ * Step 2 for initializing a new game: asking for players names.
+ */
 public class NewGame2Activity extends AppCompatActivity {
 
     Game game;
@@ -24,6 +28,7 @@ public class NewGame2Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // dynamic UI creation, uses no xml resource
         // setContentView(R.layout.activity_new_game2);
 
         game = Game.getInstance();
@@ -41,7 +46,7 @@ public class NewGame2Activity extends AppCompatActivity {
         ActionBar.LayoutParams lpView = new ActionBar.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
         TextView tv = new TextView(this);
-        tv.setText("Enter player names:");
+        tv.setText(R.string.enter_player_names);
         tv.setLayoutParams(lpView);
         linLayout.addView(tv);
 
@@ -58,7 +63,7 @@ public class NewGame2Activity extends AppCompatActivity {
         }
 
         Button btn = new Button(this);
-        btn.setText("START");
+        btn.setText(R.string.start);
         linLayout.addView(btn, new ActionBar.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         btn.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -27,4 +27,14 @@
     <string name="settings">Einstellungen</string>
     <string name="statistics">Statistik</string>
     <string name="test">Test DE</string>
+    <string name="enter_player_names">Wer spielt mit?</string>
+    <string name="num_players">Spieler</string>
+    <string name="rules">Regeln</string>
+    <string name="rule_harbour">mit Hafen-Erweiterung</string>
+    <string name="start">START</string>
+    <string name="roll_dice">%1$s würfelt</string>
+    <string name="toggle_double_roll">mit 2 Würfeln</string>
+    <string name="amusement_park">A.Park</string>
+    <string name="harbour">Harbour</string>
+    <string name="toggle_single_roll">mit 1 Würfel</string>
 </resources>
