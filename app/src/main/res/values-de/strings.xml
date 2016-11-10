@@ -16,7 +16,7 @@
     </string>
     <string name="title_activity_stats">Statistik</string>
     <string name="action_settings">dummy</string>
-    <string name="section_format">Würfelergebnis von: %1$s   %2$s</string>
+    <string name="section_format">Würfelergebnis von: %1$s \n\n%2$s</string>
     <string name="select_english">Englisch</string>
     <string name="select_german">Deutsch</string>
     <string name="select_language">Sprache auswählen:</string>

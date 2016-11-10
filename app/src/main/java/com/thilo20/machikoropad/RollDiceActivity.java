@@ -335,4 +335,10 @@ public class RollDiceActivity extends AppCompatActivity {
         // update member
         useDoubleRoll = tb.isChecked();
     }
+
+    @Override
+    public void onBackPressed() {
+        // redirect to main menu
+        onNavigateUp();
+    }
 }

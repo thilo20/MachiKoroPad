@@ -8,44 +8,28 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
-            <!--
-                        <intent-filter>
-                            <action android:name="android.intent.action.MAIN" />
-                            <category android:name="android.intent.category.LAUNCHER" />
-                        </intent-filter>
-            -->
-        </activity>
+
+        <activity android:name=".MainActivity" />
         <activity android:name=".AboutActivity" />
         <activity android:name=".NewGameActivity" />
         <activity android:name=".NewGame2Activity" />
         <activity
             android:name=".RollDiceActivity"
             android:parentActivityName=".MainActivity">
-
-            <!-- Parent activity meta-data to support 4.0 and lower -->
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.thilo20.machikoropad.MainActivity" />
         </activity>
         <activity android:name=".BuyCardActivity" />
+
         <activity
             android:name=".StatsActivity"
-            android:label="@string/statistics"
-            android:parentActivityName=".MainActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.thilo20.machikoropad.MainActivity" />
+            android:label="@string/title_activity_stats"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity android:name=".TestActivity" />
+
         <activity
             android:name=".SettingsActivity"
             android:parentActivityName=".MainActivity">
-
-            <!-- Parent activity meta-data to support 4.0 and lower -->
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.thilo20.machikoropad.MainActivity" />
         </activity>
 
         <activity android:name=".InitActivity">
