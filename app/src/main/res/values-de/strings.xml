@@ -34,7 +34,8 @@
     <string name="start">START</string>
     <string name="roll_dice">%1$s würfelt</string>
     <string name="toggle_double_roll">mit 2 Würfeln</string>
-    <string name="amusement_park">A.Park</string>
+    <string name="amusement_park">F.Park</string>
     <string name="harbour">Harbour</string>
     <string name="toggle_single_roll">mit 1 Würfel</string>
+    <string name="all_players">alle Spieler</string>
 </resources>

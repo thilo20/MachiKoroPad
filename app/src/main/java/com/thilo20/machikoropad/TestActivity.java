@@ -1,9 +1,12 @@
 package com.thilo20.machikoropad;
 
+import android.content.Context;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarData;
@@ -34,6 +37,11 @@ public class TestActivity extends AppCompatActivity {
             BarChart barChart = (BarChart) findViewById(R.id.chart);
             barChart.setVisibility(View.INVISIBLE);
         }
+
+        // show device configuration
+        Toast.makeText(getApplicationContext(),
+                getSizeName(getApplicationContext()) + " " + getResources().getConfiguration(),
+                Toast.LENGTH_LONG).show();
     }
 
     /**
@@ -170,4 +178,26 @@ public class TestActivity extends AppCompatActivity {
 
         // barChart.animateY(5000);
     }
+
+    /**
+     * url=http://stackoverflow.com/questions/5015094/how-to-determine-device-screen-size-category-small-normal-large-xlarge-usin/19256468#19256468
+     */
+    private static String getSizeName(Context context) {
+        int screenLayout = context.getResources().getConfiguration().screenLayout;
+        screenLayout &= Configuration.SCREENLAYOUT_SIZE_MASK;
+
+        switch (screenLayout) {
+            case Configuration.SCREENLAYOUT_SIZE_SMALL:
+                return "small";
+            case Configuration.SCREENLAYOUT_SIZE_NORMAL:
+                return "normal";
+            case Configuration.SCREENLAYOUT_SIZE_LARGE:
+                return "large";
+            case 4: // Configuration.SCREENLAYOUT_SIZE_XLARGE is API >= 9
+                return "xlarge";
+            default:
+                return "undefined";
+        }
+    }
+
 }

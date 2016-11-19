@@ -137,7 +137,7 @@ public class StatsActivity extends AppCompatActivity {
             String playerName;
             int playerIdx = getArguments().getInt(ARG_SECTION_NUMBER);
             if (playerIdx == 0) {
-                playerName = "all players";
+                playerName = getString(R.string.all_players);
             } else {
                 playerName = game.getPlayer(playerIdx - 1).getName();
             }

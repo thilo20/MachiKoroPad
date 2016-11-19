@@ -28,6 +28,7 @@
     <string name="dice_image">dice</string>
     <string name="enter_player_names">Enter player names:</string>
     <string name="num_players">Players</string>
+    <string name="all_players">all players</string>
     <string name="rules">Rules</string>
     <string name="rule_harbour">with Harbour extension</string>
     <string name="start">START</string>
