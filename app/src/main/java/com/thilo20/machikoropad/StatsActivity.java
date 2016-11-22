@@ -61,6 +61,7 @@ public class StatsActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        //noinspection ConstantConditions
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
@@ -180,15 +181,11 @@ public class StatsActivity extends AppCompatActivity {
 
         private String createStatsText(int sectionNumber) {
             if (game != null) {
-                StringBuffer sb = new StringBuffer();
+                StringBuilder sb = new StringBuilder();
 
                 if (sectionNumber == 0) {
-                    sb.append("Game progress:");
-                    sb.append(" Round " + game.getRounds());
-                    sb.append(", Turn " + game.getTurns());
-                    sb.append("\n");
+                    sb.append(getResources().getString(R.string.stats_overall, game.getRounds(), game.getTurns()));
                 }
-
                 sb.append("Roll results: 1..14\n");
                 sb.append(rr.toString());
                 sb.append("\nSingle rolls: 1..6\n");
@@ -198,6 +195,7 @@ public class StatsActivity extends AppCompatActivity {
 
                 return sb.toString();
             }
+            // never happens because button/activity is disabled when no game exists
             return "no game - no statistics.";
         }
 
@@ -224,7 +222,7 @@ public class StatsActivity extends AppCompatActivity {
                 BarDataSet dataset = new BarDataSet(entries, "# of single rolls: " + sr.getTotal());
                 BarDataSet dataset2 = new BarDataSet(entries2, "# of double rolls: " + dr.getTotal());
 
-                ArrayList<String> labels = new ArrayList<String>();
+                ArrayList<String> labels = new ArrayList<>();
                 // fill label for dice roll sums, 1..12
                 for (int i = 0; i < 12; i++) {
                     labels.add(Integer.toString(i + 1));
@@ -251,7 +249,7 @@ public class StatsActivity extends AppCompatActivity {
      */
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
-        public SectionsPagerAdapter(FragmentManager fm) {
+        SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
         }
 

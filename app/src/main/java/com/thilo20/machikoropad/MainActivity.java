@@ -59,8 +59,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // load current game
-        // TODO: Game implements Serializable, better use android.util.JsonReader!
-//        savedInstanceState.getSerializable();
+        // persistence not implemented: not really required, app keeps running while you play 1 hour of MachiKoro
         game = Game.getInstance();
 
         // disable "continue game" if no game is active
@@ -71,15 +70,12 @@ public class MainActivity extends AppCompatActivity {
         Button btShowStats = (Button) findViewById(R.id.btStats);
         btShowStats.setEnabled(game != null);
 
-        // disable "settings" because unused
-        Button btSettings = (Button) findViewById(R.id.btSettings);
-        // btSettings.setEnabled(false);
-
+        // just-for-fun UI element
         initDiceRoller();
 
-        // enable for debug/testing only
+        // "test" button, enable for debug/testing only
+        Button btTest = (Button) findViewById(R.id.btTest);
         if (BuildConfig.DEBUG) {
-            Button btTest = (Button) findViewById(R.id.btTest);
             btTest.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -89,7 +85,6 @@ public class MainActivity extends AppCompatActivity {
             });
         } else {
             // hide button from UI
-            Button btTest = (Button) findViewById(R.id.btTest);
             btTest.setVisibility(View.INVISIBLE);
         }
     }
@@ -98,16 +93,16 @@ public class MainActivity extends AppCompatActivity {
         // alert if a game is already there
         if (game != null) {
             AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-            builder.setMessage("A game is in progress. Do you want to dismiss it?");
+            builder.setMessage(R.string.game_exists);
             builder.setIcon(android.R.drawable.ic_dialog_alert);
-            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     Intent intent = new Intent(MainActivity.this, NewGameActivity.class);
                     startActivity(intent);
                 }
             });
-            builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            builder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     dialog.cancel();
@@ -151,6 +146,7 @@ public class MainActivity extends AppCompatActivity {
     /////////////////
     ImageView dice_picture;        //reference to dice picture
     Random rng = new Random();    //generate random numbers
+    @SuppressWarnings("deprecation")
     SoundPool dice_sound = new SoundPool(1, AudioManager.STREAM_MUSIC, 0);
     int sound_id;        //Used to control sound stream return by SoundPool
     Handler handler;    //Post message to start roll

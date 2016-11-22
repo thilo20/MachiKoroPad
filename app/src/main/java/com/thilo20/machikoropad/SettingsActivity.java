@@ -21,6 +21,7 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
         // set back button on action bar
+        //noinspection ConstantConditions
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -75,5 +76,11 @@ public class SettingsActivity extends AppCompatActivity {
         Intent refresh = new Intent(this, SettingsActivity.class);
         finish();
         startActivity(refresh);
+    }
+
+    @Override
+    public void onBackPressed() {
+        // redirect to main menu
+        onNavigateUp();
     }
 }

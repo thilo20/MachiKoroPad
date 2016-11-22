@@ -38,4 +38,12 @@
     <string name="harbour">Harbour</string>
     <string name="toggle_single_roll">mit 1 Würfel</string>
     <string name="all_players">alle Spieler</string>
+    <string name="stats_overall">Spielfortschritt: Runde %1$d, Zug %2$d\n</string>
+    <string name="amusementpark">Freizeitpark!</string>
+    <string name="amusementpark_message">Pasch gewürfelt: Extra Zug!</string>
+    <string name="nice">Cool</string>
+    <string name="no">nein</string>
+    <string name="use_harbour">Hafen benutzen?</string>
+    <string name="yes">ja</string>
+    <string name="game_exists">Ein Spiel läuft. Neu starten?</string>
 </resources>

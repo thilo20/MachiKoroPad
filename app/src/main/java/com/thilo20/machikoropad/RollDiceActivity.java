@@ -31,6 +31,7 @@ public class RollDiceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_roll_dice);
         // set back button on action bar
+        //noinspection ConstantConditions
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -52,7 +53,7 @@ public class RollDiceActivity extends AppCompatActivity {
         tvPlayer.setText(caption);
 
         // update stats text
-        TextView tvStats=(TextView)findViewById(R.id.textViewStats);
+        TextView tvStats = (TextView) findViewById(R.id.textViewStats);
         tvStats.setText("Player " + game.getCurrentPlayer().getNumber() + " rolls: "
                 + "\n" + game.getCurrentPlayer().getSingleRolls().toString()
                 + "\n" + game.getCurrentPlayer().getDoubleRolls().toString());
@@ -214,11 +215,11 @@ public class RollDiceActivity extends AppCompatActivity {
                 && (dice1 + dice2 >= 10)) {
             // show dialog
             AlertDialog.Builder builder = new AlertDialog.Builder(RollDiceActivity.this);
-            builder.setTitle("Use Harbour?");
+            builder.setTitle(R.string.use_harbour);
             builder.setMessage((dice1 + dice2) + " + 2 = " + (dice1 + dice2 + 2));
             builder.setIcon(android.R.drawable.ic_dialog_alert);
             builder.setCancelable(false);
-            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     Logger.getLogger(getClass().getName()).log(Level.INFO, "harbour used, sum=" + (dice1 + dice2 + 2));
@@ -226,7 +227,7 @@ public class RollDiceActivity extends AppCompatActivity {
                     checkExtraTurn();
                 }
             });
-            builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            builder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     Logger.getLogger(getClass().getName()).log(Level.INFO, "harbour not used, sum=" + (dice1 + dice2));
@@ -253,11 +254,11 @@ public class RollDiceActivity extends AppCompatActivity {
 
             // show info dialog
             AlertDialog.Builder builder = new AlertDialog.Builder(RollDiceActivity.this);
-            builder.setTitle("Amusement Park!");
-            builder.setMessage("You rolled doublets: Extra turn!");
+            builder.setTitle(R.string.amusementpark);
+            builder.setMessage(R.string.amusementpark_message);
             builder.setIcon(android.R.drawable.ic_dialog_alert);
             builder.setCancelable(false);
-            builder.setPositiveButton("Nice", new DialogInterface.OnClickListener() {
+            builder.setPositiveButton(R.string.nice, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     nextTurn();

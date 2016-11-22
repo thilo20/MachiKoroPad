@@ -37,4 +37,12 @@
     <string name="amusement_park">A.Park</string>
     <string name="harbour">Harbour</string>
     <string name="toggle_single_roll">use one dice</string>
+    <string name="stats_overall">Game progress: Round %1$d, Turn %2$d\n</string>
+    <string name="use_harbour">Use Harbour?</string>
+    <string name="yes">yes</string>
+    <string name="no">no</string>
+    <string name="amusementpark">Amusement Park!</string>
+    <string name="amusementpark_message">You rolled doublets: Extra turn!</string>
+    <string name="nice">Nice</string>
+    <string name="game_exists">A game is in progress. Do you want to dismiss it?</string>
 </resources>
