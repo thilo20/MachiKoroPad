@@ -17,6 +17,12 @@ import com.thilo20.machikoro.Game;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Screen to enter the dice roll result.
+ * Supports rolling 1 or 2 dice (requires card train station).
+ * Supports extra roll (requires card amusement park) when both dice show the same number.
+ * Supports +2 (requires extension/card harbour) when dice sum is 10 or more.
+ */
 public class RollDiceActivity extends AppCompatActivity {
 
     Game game;

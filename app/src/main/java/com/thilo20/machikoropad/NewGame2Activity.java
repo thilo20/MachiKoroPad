@@ -20,6 +20,7 @@ import static android.text.InputType.TYPE_TEXT_VARIATION_PERSON_NAME;
 
 /**
  * Step 2 for initializing a new game: asking for players names.
+ * Followed by the first turn, see {@link RollDiceActivity}.
  */
 public class NewGame2Activity extends AppCompatActivity {
 

@@ -17,6 +17,9 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Screen showing typical about info: app version, author, clickable weblinks.
+ */
 public class AboutActivity extends AppCompatActivity {
 
     @Override

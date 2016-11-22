@@ -12,6 +12,7 @@ import java.util.Locale;
 
 /**
  * Android entry point.
+ * Initializes app-defined locale, then launches {@link MainActivity}.
  */
 public class InitActivity extends AppCompatActivity {
 

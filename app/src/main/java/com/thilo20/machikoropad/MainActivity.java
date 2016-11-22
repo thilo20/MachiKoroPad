@@ -44,7 +44,8 @@ import java.util.TimerTask;
 
 /**
  * App main screen.
- * For the entry point for Android see InitActivity.
+ * For the Android entry point see {@link InitActivity}.
+ * Major screens when playing MachiKoro are {@link RollDiceActivity} and {@link StatsActivity}.
  */
 public class MainActivity extends AppCompatActivity {
 

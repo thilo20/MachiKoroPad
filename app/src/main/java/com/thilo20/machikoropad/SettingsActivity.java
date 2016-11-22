@@ -14,6 +14,10 @@ import android.widget.RadioGroup;
 
 import java.util.Locale;
 
+/**
+ * Screen providing app configuration options.
+ * Currently supports language switching EN/DE.
+ */
 public class SettingsActivity extends AppCompatActivity {
 
     @Override

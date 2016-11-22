@@ -15,6 +15,9 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Screen to buy a card after rolling the dice. Currently not used!
+ */
 public class BuyCardActivity extends AppCompatActivity {
 
     private String[] cards = {"Weizenfeld", "Bäckerei", "Café", "Mini-Markt", "Wald", "Stadion", "Bahnhof"};
@@ -28,7 +31,7 @@ public class BuyCardActivity extends AppCompatActivity {
 
         // populate list view
         ListView lv = (ListView) findViewById(R.id.listView);
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(
                 this,
                 android.R.layout.simple_list_item_1,
                 cards);

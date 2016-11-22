@@ -32,6 +32,11 @@ import com.thilo20.machikoro.Game;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Screens showing the statistics after or during the game.
+ * Provides visualizations using bar charts.
+ * Swipe left/right to see per-player details.
+ */
 public class StatsActivity extends AppCompatActivity {
 
     /**
