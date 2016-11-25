@@ -6,10 +6,19 @@ MachiKoroPad gives you evidence that your strategy is awesome - but fate :four_l
 Please read this forum thread to get the idea: 
 https://boardgamegeek.com/thread/1634274/machi-koro-pad-supporting-android-app
 
-## try the app!
+**MachiKoroPad features**:
+
+- track dice rolls for single and double roll
+- show statistics bar charts for tracked dice rolls (aggregated and for each player)
+- edit player names
+- supports Harbour extension (asks for +2 if you roll 10 or more)
+- supports Amusement Park extra turn
+- language support DE/EN
+
+## Try MachiKoroPad on your Android device!
 Install [MachiKoroPad latest release] (https://github.com/thilo20/MachiKoroPad/releases/latest) on your Android device and play a game of Machi Koro with your friends!
 
-(Find ready-to-use APK files for released versions also under /apk, you might have to check "install from unknown sources" on your device when prompted)
+(Find APK files for released versions also under /apk, you might have to check "install from unknown sources" on your device when prompted)
 
 ## :smile: MachiKoroPad:
 If you like MachiKoroPad, do any or all of:
@@ -30,9 +39,7 @@ SDK, build and installation:
 2.	Download this project to your computer
 3.	Open project with Android Studio
 
-development state: beta (basic functional, not harmful!)
-
-Future versions might be provided via app store.
+development state: stable (functional, not harmful!)
 
 Instructions to run:
 
@@ -45,8 +52,6 @@ Need help? Open a ticket or send an [email] (mailto://machikoro@e.mail.de)
 ## To Do, features by priority:
 - show more statistics
 - player color highlighting
-- implement language support DE/EN
-- implement extra turn
+- ask for winner, compare 
 - implement card buy and income calculation
-- implement Harbour extension, cards and logic
-
+- implement Harbour extension cards and logic
