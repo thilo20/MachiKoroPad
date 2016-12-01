@@ -32,6 +32,7 @@ import com.thilo20.dicecount.DoubleRoll;
 import com.thilo20.dicecount.RollResult;
 import com.thilo20.dicecount.SingleRoll;
 import com.thilo20.machikoro.Game;
+import com.thilo20.machikoro.Player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -130,6 +131,13 @@ public class StatsActivity extends AppCompatActivity {
         /**
          * Returns a new instance of this fragment for the given section
          * number.
+         *
+         * section content:
+         * <pre>
+         *     0: all players dice rolls single vs. double roll
+         *     1: all players roll results by player, player colors
+         *     2..(2+num players): each player's dice rolls single vs. double roll
+         * </pre>
          */
         public static PlaceholderFragment newInstance(int sectionNumber) {
             PlaceholderFragment fragment = new PlaceholderFragment();
@@ -144,24 +152,26 @@ public class StatsActivity extends AppCompatActivity {
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_stats, container, false);
 
+            // page index
+            int pageIndex = getArguments().getInt(ARG_SECTION_NUMBER);
+
             // init stats for this page
-            initStats(getArguments().getInt(ARG_SECTION_NUMBER));
+            initStats(pageIndex);
 
             TextView textView = (TextView) rootView.findViewById(R.id.section_label);
 
             String playerName;
-            int playerIdx = getArguments().getInt(ARG_SECTION_NUMBER);
-            if (playerIdx == 0) {
+            if (pageIndex < 2) {
                 playerName = getString(R.string.all_players);
             } else {
-                playerName = game.getPlayer(playerIdx - 1).getName();
+                playerName = game.getPlayer(pageIndex - 2).getName();
             }
 
             // fill text using format string template from resource
             textView.setText(getString(
                     R.string.section_format,
                     playerName,
-                    createStatsText(getArguments().getInt(ARG_SECTION_NUMBER))
+                    createStatsText(pageIndex)
             ));
 
             // To make vertical bar chart, initialize graph id this way
@@ -172,13 +182,13 @@ public class StatsActivity extends AppCompatActivity {
             barChart.getLegend().setPosition(Legend.LegendPosition.ABOVE_CHART_LEFT);
             barChart.getLegend().setTextSize(14);
 
-            boolean stacked = true;
-            if (stacked) {
+            if (pageIndex == 1) {
+                createBarChartStackedPlayers(barChart);
+            } else {
                 // fill chart with stacked bars
                 createBarChartStacked(barChart);
-            } else {
                 // fill chart
-                createBarChart(barChart);
+//                createBarChart(barChart);
             }
 
             return rootView;
@@ -196,11 +206,13 @@ public class StatsActivity extends AppCompatActivity {
                         dr.add(game.getPlayer(i).getDoubleRolls());
                         rr.add(game.getPlayer(i).getRollResult());
                     }
+                } else if (sectionNumber == 1) {
+                    // do nothing
                 } else {
                     // use player stats
-                    sr = game.getPlayer(sectionNumber - 1).getSingleRolls();
-                    dr = game.getPlayer(sectionNumber - 1).getDoubleRolls();
-                    rr = game.getPlayer(sectionNumber - 1).getRollResult();
+                    sr = game.getPlayer(sectionNumber - 2).getSingleRolls();
+                    dr = game.getPlayer(sectionNumber - 2).getDoubleRolls();
+                    rr = game.getPlayer(sectionNumber - 2).getRollResult();
                 }
             }
         }
@@ -326,6 +338,54 @@ public class StatsActivity extends AppCompatActivity {
             }
         }
 
+        /**
+         * Creates the stacked bar chart showing results player vs. player.
+         */
+        private void createBarChartStackedPlayers(BarChart barChart) {
+            if (game != null) {
+                ArrayList<BarEntry> entries = new ArrayList<>();
+                // create stacked bar chart
+
+                // fill roll results per player
+                // loop dice roll sums 1..14
+                int len = game.isHarbour() ? 14 : 12;
+                for (int i = 0; i < len; i++) {
+                    float[] vals = new float[game.getNumPlayers()];
+                    for (int pl = 0; pl < game.getNumPlayers(); pl++) {
+                        vals[pl] = (float) game.getPlayer(pl).getRollResult().getCount()[i];
+                    }
+                    entries.add(new BarEntry(vals, i + 1));
+                }
+
+                BarDataSet dataset = new BarDataSet(entries, "");
+
+                String[] names = new String[game.getNumPlayers()];
+                for (int pl = 0; pl < game.getNumPlayers(); pl++) {
+                    names[pl] = game.getPlayer(pl).getName();
+                }
+                dataset.setStackLabels(names);
+
+                ArrayList<String> labels = new ArrayList<>();
+                // fill label for dice roll sums, 1..12
+                for (int i = 0; i < len; i++) {
+                    labels.add(Integer.toString(i + 1));
+                }
+
+                // explicit color resolving with util, see AboutActivity#demoBarChart
+                int[] playercolors = new int[game.getNumPlayers()];
+                for (int pl = 0; pl < game.getNumPlayers(); pl++) {
+                    playercolors[pl] = game.getPlayer(pl).getColor();
+                }
+//                List<Integer> colors = ColorTemplate.createColors(getResources(), playercolors);
+//                dataset.setColors(colors);
+                dataset.setColors(playercolors);
+
+                BarData data = new BarData(labels, dataset);
+                barChart.setData(data);
+
+                dataset.setDrawValues(false);
+            }
+        }
     }
 
     /**
@@ -347,8 +407,8 @@ public class StatsActivity extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            // Show "1 + numPlayers" total pages.
-            return 1 + game.getNumPlayers();
+            // Show "2 + numPlayers" total pages.
+            return 2 + game.getNumPlayers();
         }
 
         /**
@@ -356,10 +416,10 @@ public class StatsActivity extends AppCompatActivity {
          */
         @Override
         public CharSequence getPageTitle(int position) {
-            if (position == 0) {
+            if (position < 2) {
                 return "Statistics for all players";
-            } else if (position <= game.getNumPlayers()) {
-                return "Statistics for " + game.getPlayer(position - 1).getName();
+            } else if (position < 2 + game.getNumPlayers()) {
+                return "Statistics for " + game.getPlayer(position - 2).getName();
             }
             return null;
         }
