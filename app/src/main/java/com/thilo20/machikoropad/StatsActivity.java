@@ -20,10 +20,14 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.github.mikephil.charting.utils.ViewPortHandler;
 import com.thilo20.dicecount.DoubleRoll;
 import com.thilo20.dicecount.RollResult;
 import com.thilo20.dicecount.SingleRoll;
@@ -31,6 +35,7 @@ import com.thilo20.machikoro.Game;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Screens showing the statistics after or during the game.
@@ -55,6 +60,8 @@ public class StatsActivity extends AppCompatActivity {
     private ViewPager mViewPager;
 
     static Game game;
+    static BarChart barChart;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +75,7 @@ public class StatsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         //noinspection ConstantConditions
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -80,8 +88,9 @@ public class StatsActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        // note: suppress options menu, has no function yet!
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_stats, menu);
+        // getMenuInflater().inflate(R.menu.menu_stats, menu);
         return true;
     }
 
@@ -156,9 +165,21 @@ public class StatsActivity extends AppCompatActivity {
             ));
 
             // To make vertical bar chart, initialize graph id this way
-            BarChart barChart = (BarChart) rootView.findViewById(R.id.chart);
-            // fill chart
-            createBarChart(barChart);
+            barChart = (BarChart) rootView.findViewById(R.id.chart);
+            barChart.animateY(1000);
+            barChart.getXAxis().setLabelsToSkip(0);
+            barChart.setDescription(null);
+            barChart.getLegend().setPosition(Legend.LegendPosition.ABOVE_CHART_LEFT);
+            barChart.getLegend().setTextSize(14);
+
+            boolean stacked = true;
+            if (stacked) {
+                // fill chart with stacked bars
+                createBarChartStacked(barChart);
+            } else {
+                // fill chart
+                createBarChart(barChart);
+            }
 
             return rootView;
         }
@@ -191,13 +212,17 @@ public class StatsActivity extends AppCompatActivity {
                 if (sectionNumber == 0) {
                     sb.append(getResources().getString(R.string.stats_overall, game.getRounds(), game.getTurns()));
                 }
-                sb.append("Roll results: 1..14\n");
-                sb.append(rr.toString());
-                sb.append("\nSingle rolls: 1..6\n");
-                sb.append(sr.toString());
-                sb.append("\nDouble rolls: 2..12\n");
-                sb.append(dr.toString());
 
+                // text shows same data as chart, skip it!
+                boolean showText = false;
+                if (showText) {
+                    sb.append("\nSingle rolls: 1..6\n");
+                    sb.append(sr.toString());
+                    sb.append("\nDouble rolls: 2..12\n");
+                    sb.append(dr.toString());
+                    sb.append("Roll results: 1..14\n");
+                    sb.append(rr.toString());
+                }
                 return sb.toString();
             }
             // never happens because button/activity is disabled when no game exists
@@ -233,19 +258,74 @@ public class StatsActivity extends AppCompatActivity {
                     labels.add(Integer.toString(i + 1));
                 }
 
-                BarData data = new BarData(labels, dataset);
-                data.addDataSet(dataset2);
-
                 // explicit color resolving with util, see AboutActivity#demoBarChart
                 List<Integer> colors = ColorTemplate.createColors(getResources(), new int[]{R.color.colorSingleRoll, R.color.colorDoubleRoll});
                 //dataset.setColors(ColorTemplate.COLORFUL_COLORS);
                 dataset.setColor(colors.get(0));
                 dataset2.setColor(colors.get(1));
 
+                BarData data = new BarData(labels, dataset);
+                data.addDataSet(dataset2);
                 barChart.setData(data);
-                barChart.animateY(1000);
             }
         }
+
+        /**
+         * Creates the stacked bar chart showing counters visually.
+         */
+        private void createBarChartStacked(BarChart barChart) {
+            if (game != null) {
+                ArrayList<BarEntry> entries = new ArrayList<>();
+                // create stacked bar chart
+
+                // fill single rolls, 1..6
+                // and  double roll sums, 2..12  into list of bar entries
+                int[] counts1 = sr.getCounts();
+                int[] counts2 = dr.getSumCount();
+                // loop dice roll sums 1..12
+                for (int i = 0; i < counts2.length + 1; i++) {
+                    float[] vals = {0f, 0f};
+                    if (i < counts1.length) {
+                        vals[0] = (float) counts1[i];
+                    }
+                    if (i > 0) {
+                        vals[1] = (float) counts2[i - 1];
+                    }
+                    entries.add(new BarEntry(vals, i + 1));
+                }
+
+                BarDataSet dataset = new BarDataSet(entries, getString(R.string.stats_chart_legend));
+                dataset.setStackLabels(new String[]{
+                        getString(R.string.stats_chart_legend_single, sr.getTotal()),
+                        getString(R.string.stats_chart_legend_double, dr.getTotal())
+                });
+
+                ArrayList<String> labels = new ArrayList<>();
+                // fill label for dice roll sums, 1..12
+                for (int i = 0; i < counts2.length + 1; i++) {
+                    labels.add(Integer.toString(i + 1));
+                }
+
+                // explicit color resolving with util, see AboutActivity#demoBarChart
+                List<Integer> colors = ColorTemplate.createColors(getResources(), new int[]{R.color.colorSingleRoll, R.color.colorDoubleRoll});
+                //dataset.setColors(ColorTemplate.COLORFUL_COLORS);
+                dataset.setColors(colors);
+
+                BarData data = new BarData(labels, dataset);
+                barChart.setData(data);
+
+                dataset.setDrawValues(false);
+                // try drawing data labels larger but with integer number - strange visual effects!
+//                data.setValueTextSize(14);
+//                data.setValueFormatter(new ValueFormatter() {
+//                    @Override
+//                    public String getFormattedValue(float value, Entry entry, int dataSetIndex, ViewPortHandler viewPortHandler) {
+//                        return String.format(Locale.US, "%1.0f", value);
+//                    }
+//                });
+            }
+        }
+
     }
 
     /**
@@ -271,11 +351,14 @@ public class StatsActivity extends AppCompatActivity {
             return 1 + game.getNumPlayers();
         }
 
+        /**
+         * unused
+         */
         @Override
         public CharSequence getPageTitle(int position) {
             if (position == 0) {
                 return "Statistics for all players";
-            } else if (position < game.getNumPlayers() + 1) {
+            } else if (position <= game.getNumPlayers()) {
                 return "Statistics for " + game.getPlayer(position - 1).getName();
             }
             return null;

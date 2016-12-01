@@ -46,4 +46,7 @@
     <string name="use_harbour">Hafen benutzen?</string>
     <string name="yes">ja</string>
     <string name="game_exists">Ein Spiel läuft. Neu starten?</string>
+    <string name="stats_chart_legend">Würfe</string>
+    <string name="stats_chart_legend_double">mit 2 Würfeln: %1$d</string>
+    <string name="stats_chart_legend_single">mit 1 Würfel: %1$d</string>
 </resources>

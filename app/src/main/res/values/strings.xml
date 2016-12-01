@@ -45,4 +45,7 @@
     <string name="amusementpark_message">You rolled doublets: Extra turn!</string>
     <string name="nice">Nice</string>
     <string name="game_exists">A game is in progress. Do you want to dismiss it?</string>
+    <string name="stats_chart_legend_single">single: %1$d</string>
+    <string name="stats_chart_legend_double">double: %1$d</string>
+    <string name="stats_chart_legend"># of rolls</string>
 </resources>

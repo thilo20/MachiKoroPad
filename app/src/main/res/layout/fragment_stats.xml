@@ -12,13 +12,13 @@
     <TextView
         android:id="@+id/section_label"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.3" />
+        android:layout_height="wrap_content"
+        android:lines="5" />
 
     <com.github.mikephil.charting.charts.BarChart
         android:id="@+id/chart"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.7" />
+        android:layout_weight="0.75" />
 
 </LinearLayout>
