@@ -182,10 +182,11 @@ public class StatsActivity extends AppCompatActivity {
             barChart.getLegend().setPosition(Legend.LegendPosition.ABOVE_CHART_LEFT);
             barChart.getLegend().setTextSize(14);
 
-            if (pageIndex == 1) {
+            if (pageIndex == 0) {
+                // fill chart with stacked bars showing player vs. player
                 createBarChartStackedPlayers(barChart);
             } else {
-                // fill chart with stacked bars
+                // fill chart with stacked bars showing single vs. double roll
                 createBarChartStacked(barChart);
                 // fill chart
 //                createBarChart(barChart);
@@ -196,7 +197,7 @@ public class StatsActivity extends AppCompatActivity {
 
         private void initStats(int sectionNumber) {
             if (game != null) {
-                if (sectionNumber == 0) {
+                if (sectionNumber == 1) {
                     // create aggregate stats
                     sr = new SingleRoll();
                     dr = new DoubleRoll();
@@ -206,7 +207,7 @@ public class StatsActivity extends AppCompatActivity {
                         dr.add(game.getPlayer(i).getDoubleRolls());
                         rr.add(game.getPlayer(i).getRollResult());
                     }
-                } else if (sectionNumber == 1) {
+                } else if (sectionNumber == 0) {
                     // do nothing
                 } else {
                     // use player stats
@@ -303,7 +304,7 @@ public class StatsActivity extends AppCompatActivity {
                     if (i > 0) {
                         vals[1] = (float) counts2[i - 1];
                     }
-                    entries.add(new BarEntry(vals, i + 1));
+                    entries.add(new BarEntry(vals, i));
                 }
 
                 BarDataSet dataset = new BarDataSet(entries, getString(R.string.stats_chart_legend));
@@ -354,7 +355,7 @@ public class StatsActivity extends AppCompatActivity {
                     for (int pl = 0; pl < game.getNumPlayers(); pl++) {
                         vals[pl] = (float) game.getPlayer(pl).getRollResult().getCount()[i];
                     }
-                    entries.add(new BarEntry(vals, i + 1));
+                    entries.add(new BarEntry(vals, i));
                 }
 
                 BarDataSet dataset = new BarDataSet(entries, "");
