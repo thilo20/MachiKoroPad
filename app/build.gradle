@@ -12,8 +12,9 @@ advancedVersioning {
         dependsOnTasks 'debug', 'release', 'assemble' // defaultValue: 'release'
     }
     outputOptions {
+        // Note: renaming has some issues, see https://github.com/moallemi/gradle-advanced-build-version/issues/25
         renameOutput true
-        nameFormat '${appName}-${versionName}'
+        nameFormat 'MachiKoroPad-${versionName}'
     }
 }
 
