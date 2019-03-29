@@ -8,9 +8,9 @@ https://boardgamegeek.com/thread/1634274/machi-koro-pad-supporting-android-app
 
 **MachiKoroPad features**:
 
-- track dice rolls for single and double roll
+- track a game of 'Machi Koro' logging player dice rolls with a minimum of user clicks
 - show statistics bar charts for tracked dice rolls (aggregated and for each player)
-- edit player names
+- edit player names, resume or continue tracking
 - supports Harbour extension (asks for +2 if you roll 10 or more)
 - supports Amusement Park extra turn
 - language support DE/EN
@@ -44,14 +44,7 @@ development state: stable (functional, not harmful!)
 Instructions to run:
 
 1.	Enable dev-mode on your Android device, check "install from unknown sources"
-2.  Start app via Android Studio, use your USB-connected Android device (or an emulator)
+2. Start app via Android Studio, use your USB-connected Android device (or an emulator)
 3.	Try the app, give feedback!
 
 Need help? Open a ticket or send an [email] (mailto://machikoro@e.mail.de)
-
-## To Do, features by priority:
-- show more statistics
-- player color highlighting
-- ask for winner, compare 
-- implement card buy and income calculation
-- implement Harbour extension cards and logic
