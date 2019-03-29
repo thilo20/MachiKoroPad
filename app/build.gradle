@@ -5,7 +5,7 @@ apply plugin: 'org.moallemi.advanced-build-version'
 advancedVersioning {
     nameOptions {
         versionMajor 1
-        versionMinor 4
+        versionMinor 5
     }
     codeOptions {
         versionCodeType org.moallemi.gradle.internal.VersionCodeType.AUTO_INCREMENT_ONE_STEP
@@ -24,7 +24,6 @@ def appVersionCode = advancedVersioning.versionCode
 
 android {
     compileSdkVersion 24
-    buildToolsVersion "24.0.2"
 
     defaultConfig {
         applicationId "com.thilo20.machikoropad"
@@ -48,13 +47,13 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:appcompat-v7:24.2.1'
-    compile 'com.android.support:design:24.2.1'
-    compile 'com.android.support:support-v4:24.2.1'
-    compile 'com.android.support:support-vector-drawable:24.2.1'
-    testCompile 'junit:junit:4.12'
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.android.support:appcompat-v7:24.2.1'
+    implementation 'com.android.support:design:24.2.1'
+    implementation 'com.android.support:support-v4:24.2.1'
+    implementation 'com.android.support:support-vector-drawable:24.2.1'
+    testImplementation 'junit:junit:4.12'
     //compile 'com.github.PhilJay:MPAndroidChart:v2.1.6'
     //compile 'com.github.PhilJay:MPAndroidChart:v3.0.0-beta1'
-    compile 'com.github.PhilJay:MPAndroidChart:v2.2.5'
+    implementation 'com.github.PhilJay:MPAndroidChart:v2.2.5'
 }
