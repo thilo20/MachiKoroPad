@@ -1,8 +1,10 @@
 <resources>
     <string name="app_name">MachiKoroPad</string>
     <string name="app_about">About MachiKoroPad:
-        \nMachiKoroPad is intended to be used while playing the realworld board/card game Machi Koro.
-        Each turn, you enter your dice roll result and what card you bought - the app keeps track of each player\'s cards and credits, produces various statistics and predicts who will win!
+        \nUse MachiKoroPad while playing the real-world board/card game \'Machi Koro\' with friends.
+        On each turn, just enter your dice roll result.
+        The app produces statistics as bar charts for you to inspect.
+        Discuss your strategy with all players - during or after playing!
         \n
         \nBoardgame forum:
         \nsee https://boardgamegeek.com/article/23991095

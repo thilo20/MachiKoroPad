@@ -2,8 +2,10 @@
 <resources>
     <string name="app_name">MachiKoroPad</string>
     <string name="app_about">Über MachiKoroPad:
-        \nMachiKoroPad benutzt Du nebenbei während Du das Kartenspiel Machi Koro mit Freunden spielst.
-        In jedem Zug tippst Du Dein Würfelergebnis ein und welche Karte Du kaufst - die App erfasst Würfelwürfe, Karten und Geld jedes Spielers und erzeugt Statistiken!
+        \nVerwende MachiKoroPad während Du das Kartenspiel \'Machi Koro\' mit Freunden spielst.
+        In jedem Zug tippst Du Dein Würfelergebnis ein.
+        Die App erzeugt Statistiken als Balkendiagramme zum Anfassen.
+        Diskutiere Deine Strategie mit allen Mitspielern - während oder nach dem Spiel!
         \n
         \nBrettspiel-Forum:
         \nsee https://boardgamegeek.com/article/23991095
