@@ -16,7 +16,7 @@ https://boardgamegeek.com/thread/1634274/machi-koro-pad-supporting-android-app
 - language support DE/EN
 
 ## Try MachiKoroPad on your Android device!
-Install [MachiKoroPad latest release] (https://github.com/thilo20/MachiKoroPad/releases/latest) on your Android device and play a game of Machi Koro with your friends!
+Install [MachiKoroPad latest release](https://github.com/thilo20/MachiKoroPad/releases/latest) on your Android device and play a game of Machi Koro with your friends!
 
 (Find APK files for released versions also under /apk, you might have to check "install from unknown sources" on your device when prompted)
 
@@ -24,10 +24,10 @@ Install [MachiKoroPad latest release] (https://github.com/thilo20/MachiKoroPad/r
 If you like MachiKoroPad, do any or all of:
 
 - spread the word: tell friends! 
-- share your experience on [boardgamegeek forum] (https://boardgamegeek.com/article/23991095)
+- share your experience on [boardgamegeek forum](https://boardgamegeek.com/article/23991095)
 - rate 5 stars
-- give feedback via the [wiki] (https://github.com/thilo20/MachiKoroPad/wiki)
-- [**Donate 1 €**] (https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6AUDBWBAUTJ4G) to :icecream: feed me! Thank you!
+- give feedback via the [wiki](https://github.com/thilo20/MachiKoroPad/wiki)
+- [**Donate 1 €**](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6AUDBWBAUTJ4G) to :icecream: feed me! Thank you!
 
 
 # software development:
@@ -47,4 +47,4 @@ Instructions to run:
 2. Start app via Android Studio, use your USB-connected Android device (or an emulator)
 3.	Try the app, give feedback!
 
-Need help? Open a ticket or send an [email] (mailto://machikoro@e.mail.de)
+Need help? Open a ticket or send an [email](mailto://machikoro@e.mail.de)
