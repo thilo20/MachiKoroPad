@@ -19,77 +19,88 @@
         android:text="@string/roll_dice"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <RadioGroup
-        android:layout_width="wrap_content"
+    <view
+        class="org.ricts.abstractmachine.ui.utils.MultiLineRadioGroup"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/textView3"
-        android:id="@+id/w1">
+        android:orientation="horizontal"
+        android:id="@+id/radiogroup1"
+        android:layout_below="@+id/textView3">
 
-        <RadioButton
-            android:id="@+id/dice1"
+        <RadioGroup
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:button="@drawable/one"
-            android:padding="@dimen/dice_padding" />
+            android:orientation="horizontal"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/textView3"
+            android:id="@+id/w1">
 
-        <RadioButton
-            android:id="@+id/dice4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:button="@drawable/four"
-            android:padding="@dimen/dice_padding" />
-    </RadioGroup>
+            <RadioButton
+                android:id="@+id/dice1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/one_inverted"
+                android:padding="@dimen/dice_padding" />
 
-    <RadioButton
-        android:id="@+id/dice2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:button="@drawable/two"
-        android:padding="@dimen/dice_padding"
-        android:layout_below="@+id/textView3"
-        android:layout_toRightOf="@+id/w1"
-        android:layout_toEndOf="@+id/w1" />
+            <RadioButton
+                android:id="@+id/dice4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/four"
+                android:padding="@dimen/dice_padding" />
 
-    <RadioButton
-        android:id="@+id/dice3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:button="@drawable/three"
-        android:padding="@dimen/dice_padding"
-        android:layout_alignTop="@+id/dice2"
-        android:layout_toRightOf="@+id/dice2"
-        android:layout_toEndOf="@+id/dice2" />
+            <RadioButton
+                android:id="@+id/dice2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/two"
+                android:padding="@dimen/dice_padding"
+                android:layout_below="@+id/textView3"
+                android:layout_toRightOf="@+id/w1"
+                android:layout_toEndOf="@+id/w1" />
 
-    <RadioButton
-        android:id="@+id/dice5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:button="@drawable/five"
-        android:padding="@dimen/dice_padding"
-        android:paddingTop="@dimen/dice_padding"
+            <RadioButton
+                android:id="@+id/dice3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/three"
+                android:padding="@dimen/dice_padding"
+                android:layout_alignTop="@+id/dice2"
+                android:layout_toRightOf="@+id/dice2"
+                android:layout_toEndOf="@+id/dice2" />
 
-        android:layout_below="@+id/dice2"
-        android:layout_alignLeft="@+id/dice2"
-        android:layout_alignStart="@+id/dice2" />
+            <RadioButton
+                android:id="@+id/dice5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/five"
+                android:padding="@dimen/dice_padding"
+                android:paddingTop="@dimen/dice_padding"
 
-    <RadioButton
-        android:id="@+id/dice6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:button="@drawable/six"
-        android:padding="@dimen/dice_padding"
-        android:layout_alignTop="@+id/dice5"
-        android:layout_toRightOf="@+id/dice5"
-        android:layout_toEndOf="@+id/dice5" />
+                android:layout_below="@+id/dice2"
+                android:layout_alignLeft="@+id/dice2"
+                android:layout_alignStart="@+id/dice2" />
+
+            <RadioButton
+                android:id="@+id/dice6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/six"
+                android:padding="@dimen/dice_padding"
+                android:layout_alignTop="@+id/dice5"
+                android:layout_toRightOf="@+id/dice5"
+                android:layout_toEndOf="@+id/dice5" />
+
+        </RadioGroup>
+    </view>
 
     <ToggleButton
         android:textOff="@string/toggle_double_roll"
         android:textOn="@string/toggle_single_roll"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/w1"
+        android:layout_below="@id/radiogroup1"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="11dp"
