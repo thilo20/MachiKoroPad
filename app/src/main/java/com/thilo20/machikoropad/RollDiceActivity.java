@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.ToggleButton;
@@ -73,6 +74,17 @@ public class RollDiceActivity extends AppCompatActivity {
                 diceRolled(v, 1);
             }
         });
+        rb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    buttonView.setButtonDrawable(R.drawable.one_inverted);
+                } else {
+                    buttonView.setButtonDrawable(R.drawable.one);
+                }
+            }
+        });
+
         rb = (RadioButton) findViewById(R.id.dice2);
         rb.setOnClickListener(new View.OnClickListener() {
             @Override
