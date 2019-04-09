@@ -14,7 +14,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:text="@string/roll_dice"
         android:textAppearance="?android:attr/textAppearanceLarge" />
@@ -37,9 +36,6 @@
             android:id="@+id/dice2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/textView3"
-            android:layout_toEndOf="@+id/w1"
-            android:layout_toRightOf="@+id/w1"
             android:button="@drawable/two"
             android:padding="@dimen/dice_padding" />
 
@@ -47,9 +43,6 @@
             android:id="@+id/dice3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/dice2"
-            android:layout_toEndOf="@+id/dice2"
-            android:layout_toRightOf="@+id/dice2"
             android:button="@drawable/three"
             android:padding="@dimen/dice_padding" />
 
@@ -64,21 +57,13 @@
             android:id="@+id/dice5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/dice2"
-            android:layout_alignStart="@+id/dice2"
-            android:layout_alignLeft="@+id/dice2"
-
             android:button="@drawable/five"
-            android:padding="@dimen/dice_padding"
-            android:paddingTop="@dimen/dice_padding" />
+            android:padding="@dimen/dice_padding" />
 
         <RadioButton
             android:id="@+id/dice6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/dice5"
-            android:layout_toEndOf="@+id/dice5"
-            android:layout_toRightOf="@+id/dice5"
             android:button="@drawable/six"
             android:padding="@dimen/dice_padding" />
     </org.ricts.abstractmachine.ui.utils.MultiLineRadioGroup>
@@ -89,18 +74,16 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/radiogroup1"
         android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
         android:layout_marginTop="11dp"
         android:textOff="@string/toggle_double_roll"
         android:textOn="@string/toggle_single_roll" />
 
-    <RadioGroup
-        android:id="@+id/w2"
-        android:layout_width="wrap_content"
+    <org.ricts.abstractmachine.ui.utils.MultiLineRadioGroup
+        android:id="@+id/radiogroup2"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/toggleButton"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true">
+        android:orientation="horizontal">
 
         <RadioButton
             android:id="@+id/dice21"
@@ -110,59 +93,47 @@
             android:padding="@dimen/dice_padding" />
 
         <RadioButton
+            android:id="@+id/dice22"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@drawable/two"
+            android:padding="@dimen/dice_padding" />
+
+        <RadioButton
+            android:id="@+id/dice23"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@drawable/three"
+            android:padding="@dimen/dice_padding" />
+
+        <RadioButton
             android:id="@+id/dice24"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:button="@drawable/four" />
-    </RadioGroup>
+            android:button="@drawable/four"
+            android:padding="@dimen/dice_padding" />
 
-    <RadioButton
-        android:id="@+id/dice22"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/toggleButton"
-        android:layout_toEndOf="@+id/w2"
-        android:layout_toRightOf="@+id/w2"
-        android:button="@drawable/two"
-        android:padding="@dimen/dice_padding" />
+        <RadioButton
+            android:id="@+id/dice25"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@drawable/five"
+            android:padding="@dimen/dice_padding" />
 
-    <RadioButton
-        android:id="@+id/dice23"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/dice22"
-        android:layout_toEndOf="@+id/dice22"
-        android:layout_toRightOf="@+id/dice22"
-        android:button="@drawable/three"
-        android:padding="@dimen/dice_padding" />
-
-    <RadioButton
-        android:id="@+id/dice25"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/dice22"
-        android:layout_alignStart="@+id/dice22"
-        android:layout_alignLeft="@+id/dice22"
-        android:button="@drawable/five"
-        android:padding="@dimen/dice_padding" />
-
-    <RadioButton
-        android:id="@+id/dice26"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/dice25"
-        android:layout_toEndOf="@+id/dice25"
-        android:layout_toRightOf="@+id/dice25"
-        android:button="@drawable/six"
-        android:padding="@dimen/dice_padding" />
+        <RadioButton
+            android:id="@+id/dice26"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@drawable/six"
+            android:padding="@dimen/dice_padding" />
+    </org.ricts.abstractmachine.ui.utils.MultiLineRadioGroup>
 
     <TextView
         android:id="@+id/textViewStats"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/w2"
+        android:layout_below="@id/radiogroup2"
         android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
         android:text="last rolls"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
@@ -174,7 +145,6 @@
         android:layout_alignBaseline="@+id/toggleButton"
         android:layout_alignBottom="@+id/toggleButton"
         android:layout_toEndOf="@+id/toggleButton"
-        android:layout_toRightOf="@+id/toggleButton"
         android:text="@string/amusement_park" />
 
     <CheckBox
@@ -184,7 +154,6 @@
         android:layout_alignBaseline="@+id/toggleButton"
         android:layout_alignBottom="@+id/toggleButton"
         android:layout_toEndOf="@+id/cbExtraTurn"
-        android:layout_toRightOf="@+id/cbExtraTurn"
         android:text="@string/harbour" />
 
 </RelativeLayout>
