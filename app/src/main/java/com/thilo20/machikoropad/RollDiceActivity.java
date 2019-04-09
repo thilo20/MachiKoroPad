@@ -2,6 +2,8 @@ package com.thilo20.machikoropad;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.annotation.DrawableRes;
+import android.support.annotation.IdRes;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -67,62 +69,16 @@ public class RollDiceActivity extends AppCompatActivity {
 
         // wire dice buttons
         /** Called when the user clicked on one of the dice */
-        RadioButton rb = (RadioButton) findViewById(R.id.dice1);
-        rb.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                diceRolled(v, 1);
-            }
-        });
-        rb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    buttonView.setButtonDrawable(R.drawable.one_inverted);
-                } else {
-                    buttonView.setButtonDrawable(R.drawable.one);
-                }
-            }
-        });
-
-        rb = (RadioButton) findViewById(R.id.dice2);
-        rb.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                diceRolled(v, 2);
-            }
-        });
-        rb = (RadioButton) findViewById(R.id.dice3);
-        rb.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                diceRolled(v, 3);
-            }
-        });
-        rb = (RadioButton) findViewById(R.id.dice4);
-        rb.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                diceRolled(v, 4);
-            }
-        });
-        rb = (RadioButton) findViewById(R.id.dice5);
-        rb.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                diceRolled(v, 5);
-            }
-        });
-        rb = (RadioButton) findViewById(R.id.dice6);
-        rb.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                diceRolled(v, 6);
-            }
-        });
+        initDiceButton(R.id.dice1, 1, R.drawable.one, R.drawable.one_inverted);
+        initDiceButton(R.id.dice2, 2, R.drawable.two, R.drawable.two_inverted);
+        initDiceButton(R.id.dice3, 3, R.drawable.three, R.drawable.three_inverted);
+        initDiceButton(R.id.dice4, 4, R.drawable.four, R.drawable.four_inverted);
+        initDiceButton(R.id.dice5, 5, R.drawable.five, R.drawable.five_inverted);
+        initDiceButton(R.id.dice6, 6, R.drawable.six, R.drawable.six_inverted);
 
         // wire dice2 buttons
         /** Called when the user clicked on one of the dice */
+        RadioButton rb;
         rb = (RadioButton) findViewById(R.id.dice21);
         rb.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -200,6 +156,26 @@ public class RollDiceActivity extends AppCompatActivity {
             }
         });
         cbAmusementPark.setChecked(game.getCurrentPlayer().hasAmusementPark());
+    }
+
+    private void initDiceButton(@IdRes int buttonId, final int number, @DrawableRes final int imageIdStart, @DrawableRes final int imageIdSelected) {
+        RadioButton rb = (RadioButton) findViewById(buttonId);
+        rb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                diceRolled(v, number);
+            }
+        });
+        rb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    buttonView.setButtonDrawable(imageIdSelected);
+                } else {
+                    buttonView.setButtonDrawable(imageIdStart);
+                }
+            }
+        });
     }
 
     public void diceRolled(View view, int number) {
