@@ -29,7 +29,7 @@
             android:id="@+id/dice1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:button="@drawable/one_inverted"
+          android:button="@drawable/one"
             android:padding="@dimen/dice_padding" />
 
         <RadioButton
