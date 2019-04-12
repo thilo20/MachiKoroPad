@@ -79,49 +79,12 @@ public class RollDiceActivity extends AppCompatActivity {
 
     // wire dice2 buttons
     /** Called when the user clicked on one of the dice */
-    RadioButton rb;
-    rb = (RadioButton) findViewById(R.id.dice21);
-    rb.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        dice2Rolled(v, 1);
-      }
-    });
-    rb = (RadioButton) findViewById(R.id.dice22);
-    rb.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        dice2Rolled(v, 2);
-      }
-    });
-    rb = (RadioButton) findViewById(R.id.dice23);
-    rb.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        dice2Rolled(v, 3);
-      }
-    });
-    rb = (RadioButton) findViewById(R.id.dice24);
-    rb.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        dice2Rolled(v, 4);
-      }
-    });
-    rb = (RadioButton) findViewById(R.id.dice25);
-    rb.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        dice2Rolled(v, 5);
-      }
-    });
-    rb = (RadioButton) findViewById(R.id.dice26);
-    rb.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        dice2Rolled(v, 6);
-      }
-    });
+    initDice2Button(R.id.dice21, 1, R.drawable.one, R.drawable.one_inverted);
+    initDice2Button(R.id.dice22, 2, R.drawable.two, R.drawable.two_inverted);
+    initDice2Button(R.id.dice23, 3, R.drawable.three, R.drawable.three_inverted);
+    initDice2Button(R.id.dice24, 4, R.drawable.four, R.drawable.four_inverted);
+    initDice2Button(R.id.dice25, 5, R.drawable.five, R.drawable.five_inverted);
+    initDice2Button(R.id.dice26, 6, R.drawable.six, R.drawable.six_inverted);
 
     ToggleButton tb = (ToggleButton) findViewById(R.id.toggleButton);
     tb.setOnClickListener(new View.OnClickListener() {
@@ -166,6 +129,27 @@ public class RollDiceActivity extends AppCompatActivity {
       @Override
       public void onClick(View v) {
         diceRolled(v, number);
+      }
+    });
+    rb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+      @Override
+      public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        if (isChecked) {
+          buttonView.setButtonDrawable(imageIdSelected);
+        } else {
+          buttonView.setButtonDrawable(imageIdStart);
+        }
+      }
+    });
+  }
+
+  private void initDice2Button(@IdRes int buttonId, final int number,
+      @DrawableRes final int imageIdStart, @DrawableRes final int imageIdSelected) {
+    RadioButton rb = (RadioButton) findViewById(buttonId);
+    rb.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        dice2Rolled(v, number);
       }
     });
     rb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
