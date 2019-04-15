@@ -61,12 +61,17 @@ public class RollDiceActivity extends AppCompatActivity {
     }
     tvPlayer.setText(caption);
 
-    // update stats text
+    // update in-game stats text
     TextView tvStats = (TextView) findViewById(R.id.textViewStats);
-    tvStats.setText(String.format("Player %d rolls: \n%s\n%s",
-        game.getCurrentPlayer().getNumber(),
-        game.getCurrentPlayer().getSingleRolls().toString(),
-        game.getCurrentPlayer().getDoubleRolls().toString()));
+    if (BuildConfig.DEBUG) {
+      tvStats.setText(String.format("Player %d rolls: \n%s\n%s",
+          game.getCurrentPlayer().getNumber(),
+          game.getCurrentPlayer().getSingleRolls().toString(),
+          game.getCurrentPlayer().getDoubleRolls().toString()));
+      tvStats.setVisibility(View.VISIBLE);
+    } else {
+      tvStats.setVisibility(View.INVISIBLE);
+    }
 
     // wire dice buttons
     /** Called when the user clicked on one of the dice */
