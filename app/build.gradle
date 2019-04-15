@@ -41,9 +41,8 @@ android {
     defaultConfig {
         applicationId "com.thilo20.machikoropad"
         minSdkVersion 17
-        targetSdkVersion 24
-        versionCode appVersionCode
-        versionName appVersionName
+        targetSdkVersion 28
+        compileSdkVersion 28
         vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
